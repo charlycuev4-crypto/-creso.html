@@ -41,7 +41,7 @@
             color: var(--text-main);
             line-height: 1.45;
             overflow-x: hidden;
-            padding-bottom: 110px;
+            padding-bottom: 130px;
         }
 
         /* ========== TOAST NOTIFICATION ========== */
@@ -196,7 +196,6 @@
             overflow: hidden;
         }
 
-        /* Cuadro con la foto limpia sin títulos encima */
         .slide-full-photo {
             padding: 0;
             background: #022c22;
@@ -247,7 +246,6 @@
                         linear-gradient(125deg, #064e3b 0%, #047857 55%, #0f766e 100%);
         }
 
-        /* Cierre final: nombre CRESO en dorado sobre fondo verde */
         .slide-brand-gold {
             padding: 26px 48px 44px;
             display: flex;
@@ -503,7 +501,7 @@
             border-color: var(--brand-primary);
         }
 
-        /* ========== GRID DE PRODUCTOS (CUADRO COMPLETO CON BORDE VERDE) ========== */
+        /* ========== GRID DE PRODUCTOS (CUADRO AMPLIO PARA EXHIBIR MEJOR LA FOTO) ========== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -533,15 +531,15 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 18px;
         }
 
         .card {
             background: var(--bg-card);
             border: 2.5px solid var(--border-card-green);
-            border-radius: 16px;
-            padding: 11px;
+            border-radius: 18px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -565,13 +563,13 @@
 
         .badge {
             position: absolute;
-            top: 19px;
-            left: 19px;
+            top: 20px;
+            left: 20px;
             background: var(--brand-primary-dark);
             color: #ffffff;
-            padding: 4px 9px;
+            padding: 4px 10px;
             border-radius: 7px;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             font-weight: 800;
             z-index: 5;
             letter-spacing: 0.3px;
@@ -585,10 +583,10 @@
 
         .card-visual {
             width: 100%;
-            height: 162px;
+            height: 215px;
             background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
             border: 2px solid var(--border-card-green);
-            border-radius: 11px;
+            border-radius: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -599,23 +597,25 @@
         .card-visual img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background: #ffffff;
+            padding: 4px;
         }
 
         .card-visual svg {
-            width: 82%;
-            height: 82%;
+            width: 84%;
+            height: 84%;
         }
 
         .card-body {
-            padding: 11px 2px 2px;
+            padding: 12px 3px 3px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
 
         .card-cat {
-            font-size: 0.68rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             font-weight: 800;
             letter-spacing: 1px;
@@ -624,14 +624,14 @@
         }
 
         .card-title {
-            font-size: 1.02rem;
+            font-size: 1.06rem;
             font-weight: 800;
             color: var(--text-main);
             margin-bottom: 4px;
         }
 
         .card-desc {
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             color: var(--text-secondary);
             margin-bottom: 12px;
             flex: 1;
@@ -646,17 +646,17 @@
         }
 
         .price-main {
-            font-size: 1.32rem;
+            font-size: 1.35rem;
             font-weight: 900;
             color: var(--text-main);
         }
 
         .price-wholesale {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 800;
             color: var(--brand-primary-dark);
             background: var(--brand-primary-soft);
-            padding: 3px 8px;
+            padding: 3px 9px;
             border-radius: 6px;
             border: 1px solid var(--border-brand);
         }
@@ -668,7 +668,7 @@
         .progress-label {
             display: flex;
             justify-content: space-between;
-            font-size: 0.73rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             font-weight: 700;
             margin-bottom: 4px;
@@ -693,17 +693,17 @@
         .card-actions {
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 6px;
+            gap: 8px;
         }
 
         .btn-add {
             background: var(--brand-primary-dark);
             color: #ffffff;
             border: none;
-            padding: 10px 12px;
+            padding: 11px 14px;
             border-radius: 10px;
             font-weight: 800;
-            font-size: 0.86rem;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -720,9 +720,9 @@
             background: var(--brand-accent-soft);
             color: #b45309;
             border: 1px solid rgba(245, 158, 11, 0.55);
-            padding: 10px 10px;
+            padding: 11px 12px;
             border-radius: 10px;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             font-weight: 800;
             cursor: pointer;
             white-space: nowrap;
@@ -882,8 +882,41 @@
             border-bottom: 1px solid var(--border-light);
         }
 
-        .cart-item-info h4 { font-size: 0.92rem; color: var(--text-main); }
-        .cart-item-meta { font-size: 0.8rem; color: var(--brand-primary-dark); font-weight: 700; }
+        .cart-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-thumb {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-card-green);
+            background: #f0fdf4;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cart-item-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #ffffff;
+        }
+
+        .cart-item-thumb svg {
+            width: 85%;
+            height: 85%;
+        }
+
+        .cart-item-info h4 { font-size: 0.9rem; color: var(--text-main); }
+        .cart-item-meta { font-size: 0.78rem; color: var(--brand-primary-dark); font-weight: 700; }
 
         .qty-controls {
             display: flex;
@@ -1060,6 +1093,7 @@
         }
 
         @media (max-width: 600px) {
+            body { padding-bottom: 140px; }
             .logo { font-size: 1.85rem; letter-spacing: 3px; }
             .lema { font-size: 0.8rem; }
             .slide-full-photo img { height: 245px; }
@@ -1070,15 +1104,15 @@
             .slide-visual-badge { font-size: 2.3rem; }
             .slide-brand-name { font-size: 2.15rem; letter-spacing: 5px; }
             .info-strip { grid-template-columns: 1fr; gap: 8px; }
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .card { padding: 8px; border-width: 2px; }
-            .card-visual { height: 122px; border-width: 1.5px; border-radius: 10px; }
-            .badge { top: 14px; left: 14px; font-size: 0.64rem; padding: 3px 7px; }
-            .card-body { padding: 9px 2px 2px; }
-            .card-title { font-size: 0.92rem; }
-            .card-desc { display: none; }
-            .price-main { font-size: 1.1rem; }
-            .card-actions { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr; gap: 14px; }
+            .card { padding: 12px; border-width: 2.5px; }
+            .card-visual { height: 230px; border-width: 2px; border-radius: 12px; }
+            .badge { top: 20px; left: 20px; font-size: 0.72rem; padding: 4px 9px; }
+            .card-body { padding: 11px 2px 2px; }
+            .card-title { font-size: 1.04rem; }
+            .card-desc { display: block; font-size: 0.83rem; }
+            .price-main { font-size: 1.28rem; }
+            .card-actions { grid-template-columns: 1fr auto; }
             .form-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -1098,20 +1132,18 @@
                 </div>
                 <div class="top-controls">
                     <button class="icon-btn active-sound" id="soundToggleBtn" onclick="toggleSound()" title="Sonido">🔊</button>
-                    <button class="icon-btn" onclick="playClickSound(); toggleAdmin();" title="Configurar">⚙️</button>
+                    <button class="icon-btn" onclick="playClickSound(); toggleAdmin();" title="Configurar (con contraseña)">🔒</button>
                 </div>
             </div>
 
             <!-- CARRUSEL / RULETA ARRIBA DE TODO CON LA FOTO LIMPIA SIN TÍTULOS ENCIMA -->
             <div class="hero-carousel" id="heroCarousel">
                 <div class="hero-slides" id="heroSlides">
-                    <!-- Cuadro 1: Foto limpia de CRESO sin títulos tapando -->
                     <div class="hero-slide slide-full-photo">
                         <span class="slide-corner-brand">CRESO</span>
                         <img src="https://i.ibb.co/G45tqcrn/IMG-20261120-WA0000.jpg" alt="CRESO">
                     </div>
 
-                    <!-- Cuadro 2: Oferta Mayorista -->
                     <div class="hero-slide slide-offer-style slide-offer-1">
                         <div class="slide-content">
                             <span class="slide-kicker">🔥 Oferta Mayorista</span>
@@ -1121,7 +1153,6 @@
                         <div class="slide-visual-badge">💰📦</div>
                     </div>
 
-                    <!-- Cuadro 3: Oferta Audio y Conexión -->
                     <div class="hero-slide slide-offer-style slide-offer-2">
                         <div class="slide-content">
                             <span class="slide-kicker">🎧 Audio &amp; Conexión</span>
@@ -1131,7 +1162,6 @@
                         <div class="slide-visual-badge">🎧🔌</div>
                     </div>
 
-                    <!-- Cuadro 4: Cierre con CRESO en dorado sobre fondo verde -->
                     <div class="hero-slide slide-brand-gold">
                         <div class="slide-brand-showcase">
                             <span class="slide-kicker">✨ Sello Oficial</span>
@@ -1266,7 +1296,7 @@
             <div class="drawer-handle"></div>
             <div class="drawer-header">
                 <h2>⚙️ Configurar CRESO</h2>
-                <button class="drawer-close" onclick="playClickSound(); toggleAdmin();">✕</button>
+                <button class="drawer-close" onclick="playClickSound(); closeAdminDrawer();">✕</button>
             </div>
             <div class="drawer-body">
                 <div class="admin-box">
@@ -1291,6 +1321,10 @@
     </footer>
 
     <script>
+        /* ========== CONTRASEÑA PARA ENTRAR A LA RUEDITA ========== */
+        const ADMIN_PASS = "creso2026";
+        let adminUnlocked = false;
+
         /* ========== CARRUSEL / RULETA ARRIBA CON FOTO LIMPIA + OFERTAS + CIERRE DORADO ========== */
         const TOTAL_SLIDES = 4;
         let currentSlide = 0;
@@ -1501,6 +1535,10 @@
             return qty >= minMay ? p.precioMayorista : p.precioUnitario;
         }
 
+        function getProductVisual(p) {
+            return p.customImg ? `<img src="${p.customImg}" alt="${p.nombre}">` : (SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite);
+        }
+
         function renderProducts() {
             const q = document.getElementById("searchInput").value.trim().toLowerCase();
             const sort = document.getElementById("sortSelect").value;
@@ -1526,12 +1564,11 @@
                 const rem = Math.max(0, minMay - qty);
                 const pct = Math.min(100, (qty / minMay) * 100);
                 const unlocked = qty >= minMay;
-                const visual = p.customImg ? `<img src="${p.customImg}" alt="${p.nombre}">` : (SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite);
 
                 return `
                 <article class="card" id="card-${p.id}">
                     ${p.badge ? `<span class="badge ${p.goldBadge ? "gold-badge" : ""}">${p.badge}</span>` : ""}
-                    <div class="card-visual">${visual}</div>
+                    <div class="card-visual">${getProductVisual(p)}</div>
                     <div class="card-body">
                         <span class="card-cat">${p.categoria}</span>
                         <h3 class="card-title">${p.nombre}</h3>
@@ -1620,9 +1657,12 @@
 
                 return `
                 <div class="cart-item">
-                    <div class="cart-item-info">
-                        <h4>${p.nombre}</h4>
-                        <div class="cart-item-meta">$${unitP.toLocaleString("es-AR")} c/u ${e.cantidad >= minMay ? "• MAYORISTA" : ""}</div>
+                    <div class="cart-item-left">
+                        <div class="cart-item-thumb">${getProductVisual(p)}</div>
+                        <div class="cart-item-info">
+                            <h4>${p.nombre}</h4>
+                            <div class="cart-item-meta">$${unitP.toLocaleString("es-AR")} c/u ${e.cantidad >= minMay ? "• MAYORISTA" : ""}</div>
+                        </div>
                     </div>
                     <div class="qty-controls">
                         <button class="qty-btn" onclick="updateQty('${p.id}', -1)">−</button>
@@ -1686,10 +1726,27 @@
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank");
         }
 
+        function closeAdminDrawer() {
+            document.getElementById("adminDrawerOverlay").classList.remove("active");
+        }
+
         function toggleAdmin() {
             const ov = document.getElementById("adminDrawerOverlay");
-            ov.classList.toggle("active");
-            if (ov.classList.contains("active")) renderAdmin();
+            if (ov.classList.contains("active")) {
+                closeAdminDrawer();
+                return;
+            }
+            if (!adminUnlocked) {
+                const pass = prompt("Ingresá la contraseña de administrador de CRESO:");
+                if (pass === null) return;
+                if (pass.trim() !== ADMIN_PASS) {
+                    showToast("Contraseña incorrecta", "🔒");
+                    return;
+                }
+                adminUnlocked = true;
+            }
+            ov.classList.add("active");
+            renderAdmin();
         }
 
         function renderAdmin() {
@@ -1738,7 +1795,7 @@
                 const img = new Image();
                 img.onload = () => {
                     const canvas = document.createElement("canvas");
-                    const max = 520;
+                    const max = 640;
                     let w = img.width, h = img.height;
                     if (w > max || h > max) {
                         if (w > h) { h = Math.round(h * max / w); w = max; }
@@ -1746,9 +1803,10 @@
                     }
                     canvas.width = w; canvas.height = h;
                     canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-                    state.products[i].customImg = canvas.toDataURL("image/jpeg", 0.78);
+                    state.products[i].customImg = canvas.toDataURL("image/jpeg", 0.82);
                     persistState();
                     renderProducts();
+                    updateCartUI();
                     playAddSound();
                     showToast("Foto guardada en CRESO", "📷");
                 };
