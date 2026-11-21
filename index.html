@@ -501,7 +501,7 @@
             border-color: var(--brand-primary);
         }
 
-        /* ========== GRID DE PRODUCTOS (CUADRO AMPLIO PARA EXHIBIR MEJOR LA FOTO) ========== */
+        /* ========== GRID DE PRODUCTOS ========== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -1122,7 +1122,7 @@
     <!-- TOASTS -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- HEADER SUPERIOR: TÍTULO + BOTONES, CARRUSEL CON FOTO LIMPIA Y BOTONES ABAJO -->
+    <!-- HEADER SUPERIOR -->
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand-row">
@@ -1136,12 +1136,12 @@
                 </div>
             </div>
 
-            <!-- CARRUSEL / RULETA ARRIBA DE TODO CON LA FOTO LIMPIA SIN TÍTULOS ENCIMA -->
+            <!-- CARRUSEL / RULETA -->
             <div class="hero-carousel" id="heroCarousel">
                 <div class="hero-slides" id="heroSlides">
                     <div class="hero-slide slide-full-photo">
                         <span class="slide-corner-brand">CRESO</span>
-                        <img src="https://i.ibb.co/G45tqcrn/IMG-20261120-WA0000.jpg" alt="CRESO">
+                        <img src="https://i.ibb.co/G45tqcrn/IMG-20261120-WA0000.jpg" alt="CRESO" onerror="this.style.display='none'">
                     </div>
 
                     <div class="hero-slide slide-offer-style slide-offer-1">
@@ -1325,7 +1325,7 @@
         const ADMIN_PASS = "creso2026";
         let adminUnlocked = false;
 
-        /* ========== CARRUSEL / RULETA ARRIBA CON FOTO LIMPIA + OFERTAS + CIERRE DORADO ========== */
+        /* ========== CARRUSEL / RULETA ========== */
         const TOTAL_SLIDES = 4;
         let currentSlide = 0;
         let slideTimer = null;
@@ -1348,7 +1348,7 @@
         function prevSlide() { goToSlide(currentSlide - 1, true); }
 
         function restartSlideTimer() {
-            if (slideTimer) clearInterval(slideTimer);
+            if (slideTimer) clearTimeout(slideTimer);
             const delay = currentSlide === TOTAL_SLIDES - 1 ? 4500 : 3200;
             slideTimer = setTimeout(() => {
                 currentSlide = (currentSlide + 1) % TOTAL_SLIDES;
@@ -1433,7 +1433,7 @@
             else { showToast("Sonido silenciado", "🔇"); }
         }
 
-        /* ========== GRÁFICOS SVG AUTOCONTENIDOS ========== */
+        /* ========== GRÁFICOS SVG DE RESPALDO AUTOCONTENIDOS ========== */
         const SVG_ICONS = {
             cableBlack: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="30" y="36" width="180" height="88" rx="14" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
@@ -1475,18 +1475,255 @@
             </svg>`
         };
 
-        /* ========== CATÁLOGO CRESO (MAYORISTA DESDE 3 UNIDADES) ========== */
+        /* ========== CATÁLOGO CRESO CON ENLACES DIRECTOS DE FOTO PEGADOS ========== */
         const DEFAULT_PRODUCTS = [
-            { id: "samsung-45w-c-a-c", nombre: "Cargador Samsung 45W Super Charger", categoria: "cargadores", desc: "Carga rápida con cable Tipo C a C.", precioUnitario: 9000, precioMayorista: 7500, minMayorista: 3, badge: "45W PD", goldBadge: true, svgKey: "charger", customImg: "" },
-            { id: "bb-micro", nombre: "Cable BlackBerry Micro-USB 0.3m", categoria: "cables", desc: "Cable corto reforzado de 30 cm (ASY-28109-001).", precioUnitario: 900, precioMayorista: 650, minMayorista: 3, badge: "30CM", goldBadge: false, svgKey: "cableBlack", customImg: "" },
-            { id: "stark-micro", nombre: "Cable STARK Micro-USB 3.1A (1m)", categoria: "cables", desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 3, badge: "3.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
-            { id: "x95-lightning", nombre: "Cable CHARGE X95 USB a Lightning", categoria: "cables", desc: "Carga 2A para iPhone/iPad, diseño reforzado.", precioUnitario: 1200, precioMayorista: 800, minMayorista: 3, badge: "3+ OFF", goldBadge: true, svgKey: "cableWhite", customImg: "" },
-            { id: "wk-lightning", nombre: "Cable WK Design Fullspeed Lightning (1m)", categoria: "cables", desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 3, badge: "2.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
-            { id: "kos-tipoc", nombre: "Cargador KOS 2A Carga Rápida Tipo C", categoria: "cargadores", desc: "Fuente de pared 2A + cable Tipo C incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 3, badge: "TIPO C", goldBadge: false, svgKey: "charger", customImg: "" },
-            { id: "kos-micro", nombre: "Cargador KOS 2A Carga Rápida Micro-USB", categoria: "cargadores", desc: "Fuente de pared 2A + cable Micro-USB incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 3, badge: "MICRO-USB", goldBadge: false, svgKey: "charger", customImg: "" },
-            { id: "kosmo-iph", nombre: "Cargador KOSMO 2A Carga Rápida Lightning", categoria: "cargadores", desc: "KOS 2A IPH para iPhone + cable Lightning.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 3, badge: "IPHONE", goldBadge: false, svgKey: "charger", customImg: "" },
-            { id: "pro21-typec", nombre: "Auriculares pro21 Stereo Type-C", categoria: "audio", desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.", precioUnitario: 3500, precioMayorista: 2500, minMayorista: 3, badge: "TYPE-C", goldBadge: true, svgKey: "earphones", customImg: "" },
-            { id: "aux-2m", nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)", categoria: "audio", desc: "Jack 3.5mm macho-macho (B6309), 2 metros.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 3, badge: "2 METROS", goldBadge: false, svgKey: "auxCable", customImg: "" }
+            {
+                id: "samsung-45w-c-a-c",
+                nombre: "Cargador Samsung 45W Super Charger",
+                categoria: "cargadores",
+                desc: "Carga rápida 2.0 (45W PD) con cable Tipo C a C.",
+                precioUnitario: 9000,
+                precioMayorista: 7500,
+                minMayorista: 3,
+                badge: "45W PD",
+                goldBadge: true,
+                svgKey: "charger",
+                customImg: "https://i.ibb.co/Kpkw2Sp9/IMG-20261120-WA0055.jpg"
+            },
+            {
+                id: "samsung-20w-usb-c",
+                nombre: "Cargador Samsung USB-C 20W Power Adapter",
+                categoria: "cargadores",
+                desc: "Adaptador de corriente USB-C 20W en caja blanca.",
+                precioUnitario: 5500,
+                precioMayorista: 4200,
+                minMayorista: 3,
+                badge: "20W USB-C",
+                goldBadge: false,
+                svgKey: "charger",
+                customImg: "https://i.ibb.co/zTRVDrMH/IMG-20261120-WA0072.jpg"
+            },
+            {
+                id: "bb-micro",
+                nombre: "Cable BlackBerry Micro-USB 0.3m",
+                categoria: "cables",
+                desc: "Cable corto reforzado de 30 cm (ASY-28109-001).",
+                precioUnitario: 900,
+                precioMayorista: 650,
+                minMayorista: 3,
+                badge: "30CM",
+                goldBadge: false,
+                svgKey: "cableBlack",
+                customImg: ""
+            },
+            {
+                id: "stark-micro",
+                nombre: "Cable STARK Micro-USB 3.1A (1m)",
+                categoria: "cables",
+                desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.",
+                precioUnitario: 1400,
+                precioMayorista: 1000,
+                minMayorista: 3,
+                badge: "3.1A",
+                goldBadge: false,
+                svgKey: "cableWhite",
+                customImg: ""
+            },
+            {
+                id: "x95-lightning",
+                nombre: "Cable CHARGE X95 USB a Lightning",
+                categoria: "cables",
+                desc: "Carga 2A para iPhone/iPad, diseño reforzado.",
+                precioUnitario: 1200,
+                precioMayorista: 800,
+                minMayorista: 3,
+                badge: "3+ OFF",
+                goldBadge: true,
+                svgKey: "cableWhite",
+                customImg: ""
+            },
+            {
+                id: "wk-lightning",
+                nombre: "Cable WK Design Fullspeed Lightning (1m)",
+                categoria: "cables",
+                desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.",
+                precioUnitario: 1400,
+                precioMayorista: 1000,
+                minMayorista: 3,
+                badge: "2.1A",
+                goldBadge: false,
+                svgKey: "cableWhite",
+                customImg: ""
+            },
+            {
+                id: "otawa-30w-c-c",
+                nombre: "Cable Otawa Datos 30W C to C (DTL-083)",
+                categoria: "cables",
+                desc: "Cable de carga flash y datos C a C de 30W.",
+                precioUnitario: 2200,
+                precioMayorista: 1600,
+                minMayorista: 3,
+                badge: "30W C-C",
+                goldBadge: false,
+                svgKey: "cableWhite",
+                customImg: "https://i.ibb.co/sJ3TGD9H/IMG-20261120-WA0063.jpg"
+            },
+            {
+                id: "otawa-30w-typec",
+                nombre: "Cable Otawa Datos 30W Type-C (DTL-082)",
+                categoria: "cables",
+                desc: "Cable de carga flash y datos 30W Type-C (caja verde).",
+                precioUnitario: 2200,
+                precioMayorista: 1600,
+                minMayorista: 3,
+                badge: "30W TYPE-C",
+                goldBadge: false,
+                svgKey: "cableWhite",
+                customImg: "https://i.ibb.co/ksP0384W/IMG-20261120-WA0061.jpg"
+            },
+            {
+                id: "lambo-4en1",
+                nombre: "Cable Lambo Tech Turbo 4 en 1 (LT-26052)",
+                categoria: "cables",
+                desc: "1 metro, 65W/27W carga rápida multiconector.",
+                precioUnitario: 3200,
+                precioMayorista: 2400,
+                minMayorista: 3,
+                badge: "4 EN 1",
+                goldBadge: true,
+                svgKey: "cableWhite",
+                customImg: "https://i.ibb.co/B54VxJP4/IMG-20261120-WA0065.jpg"
+            },
+            {
+                id: "lambo-hdtv",
+                nombre: "Cable Lambo Tech Type-C a HDTV (LT-26003)",
+                categoria: "cables",
+                desc: "Adaptador USB Tipo C a HDTV con soporte 4K 30Hz.",
+                precioUnitario: 4800,
+                precioMayorista: 3600,
+                minMayorista: 3,
+                badge: "4K HDTV",
+                goldBadge: false,
+                svgKey: "cableWhite",
+                customImg: "https://i.ibb.co/C5kzvj29/IMG-20261120-WA0067.jpg"
+            },
+            {
+                id: "kos-tipoc",
+                nombre: "Cargador KOSMO 2A Carga Rápida (KOS 2A C)",
+                categoria: "cargadores",
+                desc: "Fuente de pared 2A + cable incluido.",
+                precioUnitario: 2800,
+                precioMayorista: 2000,
+                minMayorista: 3,
+                badge: "2A RÁPIDO",
+                goldBadge: false,
+                svgKey: "charger",
+                customImg: "https://i.ibb.co/ZRJB3rDJ/IMG-20261120-WA0059.jpg"
+            },
+            {
+                id: "ultrapods-max",
+                nombre: "Auriculares Ultrapods Max Wireless 5.3",
+                categoria: "audio",
+                desc: "True wireless con estuche display digital.",
+                precioUnitario: 7800,
+                precioMayorista: 6200,
+                minMayorista: 3,
+                badge: "BT 5.3",
+                goldBadge: true,
+                svgKey: "earphones",
+                customImg: "https://i.ibb.co/BVSs16Z0/IMG-20261120-WA0080.jpg"
+            },
+            {
+                id: "m10-v53",
+                nombre: "Auriculares M10 Wireless V5.3",
+                categoria: "audio",
+                desc: "Inalámbricos con estuche visor LED de batería.",
+                precioUnitario: 7500,
+                precioMayorista: 5900,
+                minMayorista: 3,
+                badge: "LED V5.3",
+                goldBadge: false,
+                svgKey: "earphones",
+                customImg: "https://i.ibb.co/G4W3RDrJ/IMG-20261120-WA0076.jpg"
+            },
+            {
+                id: "a6s-mipods",
+                nombre: "Auriculares A6S MiPods Wireless 5.3",
+                categoria: "audio",
+                desc: "True wireless compactos con estuche de carga.",
+                precioUnitario: 6200,
+                precioMayorista: 4800,
+                minMayorista: 3,
+                badge: "A6S 5.3",
+                goldBadge: false,
+                svgKey: "earphones",
+                customImg: "https://i.ibb.co/Xk3M6hpJ/IMG-20261120-WA0069.jpg"
+            },
+            {
+                id: "p47-wireless",
+                nombre: "Vincha / Auriculares P47 Wireless 5.4+EDR",
+                categoria: "audio",
+                desc: "Auriculares inalámbricos con botones de control.",
+                precioUnitario: 8500,
+                precioMayorista: 6800,
+                minMayorista: 3,
+                badge: "5.4+EDR",
+                goldBadge: false,
+                svgKey: "earphones",
+                customImg: "https://i.ibb.co/TM8jsKMT/IMG-20261120-WA0074.jpg"
+            },
+            {
+                id: "samsung-s20-handsfree",
+                nombre: "Auriculares Samsung High Quality Handsfree",
+                categoria: "audio",
+                desc: "Manos libres con cable en empaque sellado.",
+                precioUnitario: 2600,
+                precioMayorista: 1900,
+                minMayorista: 3,
+                badge: "HANDSFREE",
+                goldBadge: false,
+                svgKey: "earphones",
+                customImg: "https://i.ibb.co/5w0fpMv/IMG-20261120-WA0078.jpg"
+            },
+            {
+                id: "pro21-typec",
+                nombre: "Auriculares pro21 Stereo Type-C",
+                categoria: "audio",
+                desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.",
+                precioUnitario: 3500,
+                precioMayorista: 2500,
+                minMayorista: 3,
+                badge: "TYPE-C",
+                goldBadge: true,
+                svgKey: "earphones",
+                customImg: ""
+            },
+            {
+                id: "aux-2m",
+                nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)",
+                categoria: "audio",
+                desc: "Jack 3.5mm macho-macho (B6309), 2 metros.",
+                precioUnitario: 1400,
+                precioMayorista: 1000,
+                minMayorista: 3,
+                badge: "2 METROS",
+                goldBadge: false,
+                svgKey: "auxCable",
+                customImg: ""
+            },
+            {
+                id: "game-box-plus",
+                nombre: "Consola Retro Game Box Plus",
+                categoria: "accesorios",
+                desc: "Consola portátil con pantalla a color y soporte joystick doble.",
+                precioUnitario: 14500,
+                precioMayorista: 12000,
+                minMayorista: 3,
+                badge: "RETRO",
+                goldBadge: true,
+                svgKey: "charger",
+                customImg: ""
+            }
         ];
 
         let state = {
@@ -1495,7 +1732,7 @@
         };
 
         try {
-            const saved = localStorage.getItem("creso_store_brand_v1");
+            const saved = localStorage.getItem("creso_store_brand_v2");
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (parsed.whatsapp) state.whatsapp = parsed.whatsapp;
@@ -1509,7 +1746,7 @@
         let currentCategory = "todos";
 
         function persistState() {
-            try { localStorage.setItem("creso_store_brand_v1", JSON.stringify(state)); } catch (e) {}
+            try { localStorage.setItem("creso_store_brand_v2", JSON.stringify(state)); } catch (e) {}
         }
 
         function showToast(msg, icon = "✅") {
@@ -1536,7 +1773,11 @@
         }
 
         function getProductVisual(p) {
-            return p.customImg ? `<img src="${p.customImg}" alt="${p.nombre}">` : (SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite);
+            const fallbackSvg = (SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite).replace(/"/g, "&quot;");
+            if (p.customImg) {
+                return `<img src="${p.customImg}" alt="${p.nombre}" loading="eager" onerror="this.onerror=null; this.parentElement.innerHTML='${fallbackSvg}';">`;
+            }
+            return SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite;
         }
 
         function renderProducts() {
@@ -1754,6 +1995,10 @@
             document.getElementById("adminProductsList").innerHTML = state.products.map((p, i) => `
                 <div class="admin-item">
                     <strong style="font-size:0.88rem;">${p.nombre}</strong>
+                    <div style="margin-top:6px;">
+                        <label style="font-size:0.7rem; color:var(--text-secondary); display:block;">URL directa de foto</label>
+                        <input type="text" value="${p.customImg || ""}" placeholder="https://..." onchange="updateImgUrl(${i}, this.value)" style="width:100%; padding:6px 8px; border:1px solid #cbd5e1; border-radius:7px; font-size:0.8rem;">
+                    </div>
                     <div class="admin-prices">
                         <div>
                             <label style="font-size:0.7rem; color:var(--text-secondary);">Unitario</label>
@@ -1767,6 +2012,14 @@
                     </div>
                 </div>
             `).join("");
+        }
+
+        function updateImgUrl(i, val) {
+            state.products[i].customImg = val.trim();
+            persistState();
+            renderProducts();
+            updateCartUI();
+            playClickSound();
         }
 
         function saveSettings() {
@@ -1807,6 +2060,7 @@
                     persistState();
                     renderProducts();
                     updateCartUI();
+                    renderAdmin();
                     playAddSound();
                     showToast("Foto guardada en CRESO", "📷");
                 };
@@ -1817,7 +2071,7 @@
 
         function exportStandaloneHTML() {
             let html = document.documentElement.outerHTML;
-            html = html.replace(/const DEFAULT_PRODUCTS = \[[\s\S]*?\];/, `const DEFAULT_PRODUCTS = ${JSON.stringify(state.products, null, 2)};`);
+            html = html.replace(/const DEFAULT_PRODUCTS = \[[\s\S]*?\];/, `const DEFAULT_PRODUCTS = ${JSON.stringify(state.products, null, 4)};`);
             html = html.replace(/whatsapp:\s*"[^"]*"/, `whatsapp: "${state.whatsapp.replace(/"/g, "")}"`);
             const blob = new Blob(["<!DOCTYPE html>\n" + html], { type: "text/html;charset=utf-8" });
             const url = URL.createObjectURL(blob);
@@ -1830,23 +2084,6 @@
 
         renderProducts();
         updateCartUI();
-
-        /* ========== CONEXIÓN CON productos.json (SIN SUPABASE NI LLAVES API) ========== */
-        (async function cargarCatalogoJSON() {
-            try {
-                const resp = await fetch("./productos.json?v=" + Date.now(), { cache: "no-store" });
-                if (!resp.ok) return;
-                const data = await resp.json();
-                if (Array.isArray(data) && data.length > 0) {
-                    state.products = data.map(p => ({ ...p, minMayorista: p.minMayorista || 3 }));
-                    persistState();
-                    renderProducts();
-                    updateCartUI();
-                }
-            } catch (e) {
-                // Si se abre local sin servidor, mantiene state.products / DEFAULT_PRODUCTS
-            }
-        })();
     </script>
 </body>
 </html>
