@@ -1,5 +1,44 @@
 [
   {
+    "id": "cargador-samsung-45w-pd01",
+    "nombre": "Cargador Samsung 45W Super Charger",
+    "categoria": "cargadores",
+    "desc": "Carga superrápida 2.0 de 45W con cable USB Tipo C a Tipo C.",
+    "precioUnitario": 9000,
+    "precioMayorista": 7500,
+    "minMayorista": 3,
+    "badge": "45W PD",
+    "goldBadge": true,
+    "svgKey": "charger",
+    "customImg": ""
+  },
+  {
+    "id": "cargador-samsung-20w-usbc",
+    "nombre": "Cargador Samsung USB-C 20W Power Adapter",
+    "categoria": "cargadores",
+    "desc": "Fuente cargadora de pared USB-C de 20W.",
+    "precioUnitario": 5000,
+    "precioMayorista": 3500,
+    "minMayorista": 3,
+    "badge": "20W USB-C",
+    "goldBadge": false,
+    "svgKey": "charger",
+    "customImg": ""
+  },
+  {
+    "id": "cargador-kosmo-2a-tipoc",
+    "nombre": "Cargador KOSMO 2A Carga Rápida Tipo C",
+    "categoria": "cargadores",
+    "desc": "Cargador de pared 2A con protección inteligente, carga rápida y cable Tipo C.",
+    "precioUnitario": 4500,
+    "precioMayorista": 3000,
+    "minMayorista": 3,
+    "badge": "2A TIPO C",
+    "goldBadge": false,
+    "svgKey": "charger",
+    "customImg": ""
+  },
+  {
     "id": "auriculares-estilo-pro-blancos",
     "nombre": "Auriculares Inalámbricos Estilo Pro",
     "categoria": "audio",
@@ -39,19 +78,6 @@
     "customImg": ""
   },
   {
-    "id": "cargador-samsung-20w-usbc",
-    "nombre": "Cargador Samsung USB-C 20W Power Adapter",
-    "categoria": "cargadores",
-    "desc": "Fuente cargadora de pared USB-C de 20W.",
-    "precioUnitario": 5000,
-    "precioMayorista": 3500,
-    "minMayorista": 3,
-    "badge": "20W USB-C",
-    "goldBadge": false,
-    "svgKey": "charger",
-    "customImg": ""
-  },
-  {
     "id": "a6s-mipods-53",
     "nombre": "Auriculares A6S MiPods Wireless 5.3",
     "categoria": "audio",
@@ -78,16 +104,29 @@
     "customImg": ""
   },
   {
-    "id": "cargador-kosmo-2a-tipoc",
-    "nombre": "Cargador KOSMO 2A Carga Rápida Tipo C",
-    "categoria": "cargadores",
-    "desc": "Cargador de pared 2A con protección inteligente, carga rápida y cable Tipo C.",
-    "precioUnitario": 4500,
-    "precioMayorista": 3000,
+    "id": "auriculares-handsfree-samsung",
+    "nombre": "Auriculares Handsfree Estilo Samsung",
+    "categoria": "audio",
+    "desc": "Auriculares con cable manos libres (Handsfree).",
+    "precioUnitario": 3000,
+    "precioMayorista": 2000,
     "minMayorista": 3,
-    "badge": "2A TIPO C",
+    "badge": "HANDSFREE",
     "goldBadge": false,
-    "svgKey": "charger",
+    "svgKey": "earbuds",
+    "customImg": ""
+  },
+  {
+    "id": "cable-lambo-hdtv-lt26003",
+    "nombre": "Cable Lambo Tech Tipo C a HDTV LT-26003",
+    "categoria": "cables",
+    "desc": "Cable Type C a HDTV 4K 30Hz, modelo LT-26003.",
+    "precioUnitario": 12000,
+    "precioMayorista": 9000,
+    "minMayorista": 3,
+    "badge": "4K HDTV",
+    "goldBadge": false,
+    "svgKey": "cable",
     "customImg": ""
   },
   {
@@ -114,6 +153,32 @@
     "badge": "30W C-C",
     "goldBadge": false,
     "svgKey": "cable",
+    "customImg": ""
+  },
+  {
+    "id": "cable-otawa-30w-dtl082",
+    "nombre": "Cable de Datos OTAWA 30W Tipo C DTL-082",
+    "categoria": "cables",
+    "desc": "Cable de datos y carga flash 30W, conector TYPE-C, modelo DTL-082.",
+    "precioUnitario": 3000,
+    "precioMayorista": 2500,
+    "minMayorista": 3,
+    "badge": "30W TYPE-C",
+    "goldBadge": false,
+    "svgKey": "cable",
+    "customImg": ""
+  },
+  {
+    "id": "consola-game-box-plus",
+    "nombre": "Consola Portátil Game Box Plus",
+    "categoria": "gadgets",
+    "desc": "Consola portátil Game Box Plus con pantalla y soporte para gamepad externo.",
+    "precioUnitario": 15000,
+    "precioMayorista": 11000,
+    "minMayorista": 3,
+    "badge": "GAME BOX",
+    "goldBadge": false,
+    "svgKey": "gamepad",
     "customImg": ""
   }
 ]
