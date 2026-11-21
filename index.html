@@ -1042,8 +1042,28 @@
             background: #ffffff;
             border: 1px solid var(--border-light);
             border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .admin-field {
+            margin-top: 8px;
+        }
+
+        .admin-field label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .admin-field input {
+            width: 100%;
+            padding: 7px 9px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.84rem;
         }
 
         .admin-prices {
@@ -1150,7 +1170,7 @@
                         <div class="slide-content">
                             <span class="slide-kicker">🔥 Oferta Mayorista</span>
                             <div class="slide-title">Llevando 3+ unidades baja el precio por pack</div>
-                            <p class="slide-sub">Cables desde $2.500 c/u y cargadores desde $3.000 c/u</p>
+                            <p class="slide-sub">Sumá 3 o más unidades de cualquier producto y llevá precio mayorista</p>
                         </div>
                         <div class="slide-visual-badge">💰📦</div>
                     </div>
@@ -1187,7 +1207,7 @@
             <!-- BOTONES DE WHATSAPP Y MAYORISTA ABAJO -->
             <div class="info-strip">
                 <a class="info-chip tech" href="https://wa.me/5491133667793" target="_blank" rel="noopener noreferrer" onclick="playClickSound();">📲 WhatsApp: 11 3366-7793</a>
-                <span class="info-chip gold">📦 3+ u. precio mayorista</span>
+                <span class="info-chip gold">📦 3+ u. (cualquier mezcla) mayorista</span>
             </div>
         </div>
     </header>
@@ -1221,7 +1241,7 @@
     <main class="container">
         <div class="section-heading">
             <h2>Catálogo disponible</h2>
-            <span>3+ unidades = Precio mayorista automático</span>
+            <span>3+ unidades sumando cualquier producto = Precio mayorista</span>
         </div>
         <div class="grid" id="productsGrid"></div>
     </main>
@@ -1305,7 +1325,7 @@
                 </div>
 
                 <div class="admin-box">
-                    <h3>📦 Precios y fotos incrustadas</h3>
+                    <h3>📦 Descripción, link de foto y precios (unidad y 3+ u.)</h3>
                     <div id="adminProductsList"></div>
                 </div>
 
@@ -1324,6 +1344,7 @@
         /* ========== CONTRASEÑA PARA ENTRAR A LA RUEDITA ========== */
         const ADMIN_PASS = "creso2026";
         let adminUnlocked = false;
+        const MIXED_WHOLESALE_MIN = 3;
 
         /* ========== CARRUSEL / RULETA ========== */
         const TOTAL_SLIDES = 4;
@@ -1474,7 +1495,7 @@
             </svg>`
         };
 
-        /* ========== CATÁLOGO CRESO EMPAREJADO CON TU JSON ========== */
+        /* ========== CATÁLOGO BASE LIMPIO (SIN FOTOS CRUZADAS) ========== */
         const DEFAULT_PRODUCTS = [
             {
                 "id": "cargador-samsung-45w-pd01",
@@ -1500,7 +1521,7 @@
                 "badge": "20W USB-C",
                 "goldBadge": false,
                 "svgKey": "charger",
-                "customImg": "https://i.ibb.co/zTRVDrMH/IMG-20261120-WA0072.jpg"
+                "customImg": ""
             },
             {
                 "id": "cargador-kosmo-2a-tipoc",
@@ -1513,7 +1534,7 @@
                 "badge": "2A TIPO C",
                 "goldBadge": false,
                 "svgKey": "charger",
-                "customImg": "https://i.ibb.co/C5kzvj29/IMG-20261120-WA0067.jpg"
+                "customImg": ""
             },
             {
                 "id": "auriculares-estilo-pro-blancos",
@@ -1526,7 +1547,7 @@
                 "badge": "WIRELESS",
                 "goldBadge": false,
                 "svgKey": "earbuds",
-                "customImg": "https://i.ibb.co/5w0fpMv/IMG-20261120-WA0078.jpg"
+                "customImg": ""
             },
             {
                 "id": "ultrapods-max-53",
@@ -1539,7 +1560,7 @@
                 "badge": "BT 5.3",
                 "goldBadge": false,
                 "svgKey": "earbuds",
-                "customImg": "https://i.ibb.co/BVSs16Z0/IMG-20261120-WA0080.jpg"
+                "customImg": ""
             },
             {
                 "id": "auriculares-m10-v53",
@@ -1552,7 +1573,7 @@
                 "badge": "M10 LED",
                 "goldBadge": false,
                 "svgKey": "earbuds",
-                "customImg": "https://i.ibb.co/G4W3RDrJ/IMG-20261120-WA0076.jpg"
+                "customImg": ""
             },
             {
                 "id": "a6s-mipods-53",
@@ -1565,7 +1586,7 @@
                 "badge": "A6S",
                 "goldBadge": false,
                 "svgKey": "earbuds",
-                "customImg": "https://i.ibb.co/Xk3M6hpJ/IMG-20261120-WA0069.jpg"
+                "customImg": ""
             },
             {
                 "id": "auriculares-p47-vincha",
@@ -1578,7 +1599,7 @@
                 "badge": "P47",
                 "goldBadge": false,
                 "svgKey": "headphones",
-                "customImg": "https://i.ibb.co/TM8jsKMT/IMG-20261120-WA0074.jpg"
+                "customImg": ""
             },
             {
                 "id": "auriculares-handsfree-samsung",
@@ -1591,7 +1612,7 @@
                 "badge": "HANDSFREE",
                 "goldBadge": false,
                 "svgKey": "earbuds",
-                "customImg": "https://i.ibb.co/ZRJB3rDJ/IMG-20261120-WA0059.jpg"
+                "customImg": ""
             },
             {
                 "id": "cable-lambo-hdtv-lt26003",
@@ -1617,7 +1638,7 @@
                 "badge": "4 EN 1",
                 "goldBadge": false,
                 "svgKey": "cable",
-                "customImg": "https://i.ibb.co/B54VxJP4/IMG-20261120-WA0065.jpg"
+                "customImg": ""
             },
             {
                 "id": "cable-otawa-30w-dtl083",
@@ -1630,7 +1651,7 @@
                 "badge": "30W C-C",
                 "goldBadge": false,
                 "svgKey": "cable",
-                "customImg": "https://i.ibb.co/sJ3TGD9H/IMG-20261120-WA0063.jpg"
+                "customImg": ""
             },
             {
                 "id": "cable-otawa-30w-dtl082",
@@ -1666,7 +1687,7 @@
         };
 
         try {
-            const saved = localStorage.getItem("creso_store_brand_v4");
+            const saved = localStorage.getItem("creso_store_brand_v6");
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (parsed.whatsapp) state.whatsapp = parsed.whatsapp;
@@ -1680,7 +1701,7 @@
         let currentCategory = "todos";
 
         function persistState() {
-            try { localStorage.setItem("creso_store_brand_v4", JSON.stringify(state)); } catch (e) {}
+            try { localStorage.setItem("creso_store_brand_v6", JSON.stringify(state)); } catch (e) {}
         }
 
         function showToast(msg, icon = "✅") {
@@ -1701,9 +1722,21 @@
             renderProducts();
         }
 
+        function getTotalCartUnits() {
+            return Object.values(cart).reduce((sum, item) => sum + (item.cantidad || 0), 0);
+        }
+
+        /* 3+ unidades sumando cualquier producto del carrito aplica precio mayorista */
+        function isWholesaleActiveForCart() {
+            return getTotalCartUnits() >= MIXED_WHOLESALE_MIN;
+        }
+
         function getEffectiveUnitPrice(p, qty) {
-            const minMay = p.minMayorista || 3;
-            return qty >= minMay ? p.precioMayorista : p.precioUnitario;
+            const minMay = p.minMayorista || MIXED_WHOLESALE_MIN;
+            if (qty >= minMay || isWholesaleActiveForCart()) {
+                return p.precioMayorista;
+            }
+            return p.precioUnitario;
         }
 
         function escapeAttr(val) {
@@ -1722,6 +1755,8 @@
             const q = document.getElementById("searchInput").value.trim().toLowerCase();
             const sort = document.getElementById("sortSelect").value;
             const grid = document.getElementById("productsGrid");
+            const totalUnits = getTotalCartUnits();
+            const wholesaleMixActive = totalUnits >= MIXED_WHOLESALE_MIN;
 
             let list = state.products.filter(p => {
                 const matchCat = currentCategory === "todos" || p.categoria === currentCategory;
@@ -1738,11 +1773,19 @@
             }
 
             grid.innerHTML = list.map(p => {
-                const minMay = p.minMayorista || 3;
+                const minMay = p.minMayorista || MIXED_WHOLESALE_MIN;
                 const qty = cart[p.id] ? cart[p.id].cantidad : 0;
-                const rem = Math.max(0, minMay - qty);
-                const pct = Math.min(100, (qty / minMay) * 100);
-                const unlocked = qty >= minMay;
+                const rem = Math.max(0, MIXED_WHOLESALE_MIN - totalUnits);
+                const pct = Math.min(100, (totalUnits / MIXED_WHOLESALE_MIN) * 100);
+                const unlocked = wholesaleMixActive || qty >= minMay;
+                const shownPrice = unlocked ? p.precioMayorista : p.precioUnitario;
+
+                let statusLeft = `Mayorista ${MIXED_WHOLESALE_MIN}+ u. (cualquier mezcla)`;
+                if (unlocked) {
+                    statusLeft = qty > 0 ? `✓ Mayorista activo (${qty} u.)` : "✓ Mayorista activo en tu pedido";
+                } else if (totalUnits > 0) {
+                    statusLeft = `${totalUnits} u. en pedido (${qty} de este)`;
+                }
 
                 return `
                 <article class="card" id="card-${p.id}">
@@ -1753,12 +1796,12 @@
                         <h3 class="card-title">${p.nombre}</h3>
                         <p class="card-desc">${p.desc}</p>
                         <div class="price-row">
-                            <span class="price-main">$${p.precioUnitario.toLocaleString("es-AR")}</span>
+                            <span class="price-main">$${shownPrice.toLocaleString("es-AR")}</span>
                             <span class="price-wholesale">${minMay}+: $${p.precioMayorista.toLocaleString("es-AR")}</span>
                         </div>
                         <div class="progress-mini">
                             <div class="progress-label ${unlocked ? "done" : ""}">
-                                <span>${unlocked ? "✓ Mayorista activo" : (qty > 0 ? `${qty} en carrito` : `Mayorista ${minMay}+ u.`)}</span>
+                                <span>${statusLeft}</span>
                                 <span>${unlocked ? "" : `Faltan ${rem}`}</span>
                             </div>
                             <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
@@ -1788,8 +1831,14 @@
                 setTimeout(() => { btn.textContent = "➕ Agregar"; btn.classList.remove("added"); }, 1000);
             }
 
-            const minMay = p.minMayorista || 3;
-            showToast(qty >= minMay ? `¡Pack x${qty} ${p.nombre} mayorista!` : `¡${p.nombre} agregado!`, "🛒");
+            const totalUnits = getTotalCartUnits();
+            if (totalUnits >= MIXED_WHOLESALE_MIN) {
+                showToast(`¡${totalUnits} unidades en total: precio mayorista activo!`, "💰");
+            } else {
+                const faltan = MIXED_WHOLESALE_MIN - totalUnits;
+                showToast(`¡${p.nombre} agregado! Sumá ${faltan} más para mayorista`, "🛒");
+            }
+
             animateFab();
             renderProducts();
             updateCartUI();
@@ -1824,10 +1873,13 @@
             }
 
             let units = 0, regularSum = 0, finalSum = 0;
+            const mixActive = isWholesaleActiveForCart();
+
             container.innerHTML = entries.map(e => {
                 const p = state.products.find(x => x.id === e.id);
                 if (!p) return "";
-                const minMay = p.minMayorista || 3;
+                const minMay = p.minMayorista || MIXED_WHOLESALE_MIN;
+                const isMayItem = mixActive || e.cantidad >= minMay;
                 const unitP = getEffectiveUnitPrice(p, e.cantidad);
                 const sub = unitP * e.cantidad;
                 units += e.cantidad;
@@ -1840,7 +1892,7 @@
                         <div class="cart-item-thumb">${getProductVisual(p)}</div>
                         <div class="cart-item-info">
                             <h4>${p.nombre}</h4>
-                            <div class="cart-item-meta">$${unitP.toLocaleString("es-AR")} c/u ${e.cantidad >= minMay ? "• MAYORISTA" : ""}</div>
+                            <div class="cart-item-meta">$${unitP.toLocaleString("es-AR")} c/u ${isMayItem ? "• MAYORISTA" : ""}</div>
                         </div>
                     </div>
                     <div class="qty-controls">
@@ -1853,9 +1905,14 @@
             }).join("");
 
             const saved = regularSum - finalSum;
-            document.getElementById("savingsContainer").innerHTML = saved > 0
-                ? `<div class="savings-banner">🎉 Ahorrás $${saved.toLocaleString("es-AR")} con precio mayorista</div>`
-                : "";
+            if (mixActive && saved > 0) {
+                document.getElementById("savingsContainer").innerHTML = `<div class="savings-banner">🎉 Mayorista activo por llevar ${units} unidades (ahorrás $${saved.toLocaleString("es-AR")})</div>`;
+            } else if (mixActive) {
+                document.getElementById("savingsContainer").innerHTML = `<div class="savings-banner">✓ Mayorista activo por llevar ${units} unidades en total</div>`;
+            } else {
+                const faltan = MIXED_WHOLESALE_MIN - units;
+                document.getElementById("savingsContainer").innerHTML = `<div class="savings-banner">💡 Sumá ${faltan} ${faltan === 1 ? "unidad más" : "unidades más"} (de cualquier producto) para activar precio mayorista</div>`;
+            }
 
             document.getElementById("cartFabBadge").textContent = units;
             document.getElementById("cartFabTotal").textContent = `$${finalSum.toLocaleString("es-AR")}`;
@@ -1884,6 +1941,7 @@
 
             playAddSound();
             let total = 0;
+            const mixActive = isWholesaleActiveForCart();
             let msg = `*PEDIDO CRESO*\n👤 *Cliente:* ${nombre}\n📱 *Tel:* ${tel}\n🚚 *Entrega:* ${entrega}\n`;
             if (entrega === "Envío a coordinar") msg += `📍 *Dirección:* ${dir}\n`;
             msg += `💳 *Pago:* ${pago}\n\n*DETALLE:*\n`;
@@ -1891,11 +1949,12 @@
             entries.forEach(e => {
                 const p = state.products.find(x => x.id === e.id);
                 if (!p) return;
-                const minMay = p.minMayorista || 3;
+                const minMay = p.minMayorista || MIXED_WHOLESALE_MIN;
+                const isMayItem = mixActive || e.cantidad >= minMay;
                 const uPrice = getEffectiveUnitPrice(p, e.cantidad);
                 const sub = uPrice * e.cantidad;
                 total += sub;
-                msg += `• ${e.cantidad}x ${p.nombre}${e.cantidad >= minMay ? " [Mayorista]" : ""} — $${sub.toLocaleString("es-AR")}\n`;
+                msg += `• ${e.cantidad}x ${p.nombre}${isMayItem ? " [Mayorista]" : ""} — $${sub.toLocaleString("es-AR")}\n`;
             });
 
             msg += `\n💰 *Total (${pago}): $${total.toLocaleString("es-AR")}*`;
@@ -1932,24 +1991,39 @@
             document.getElementById("adminWhatsapp").value = state.whatsapp;
             document.getElementById("adminProductsList").innerHTML = state.products.map((p, i) => `
                 <div class="admin-item">
-                    <strong style="font-size:0.88rem;">${p.nombre}</strong>
-                    <div style="margin-top:6px;">
-                        <label style="font-size:0.7rem; color:var(--text-secondary); display:block;">URL directa de foto</label>
-                        <input type="text" value="${escapeAttr(p.customImg || "")}" placeholder="https://..." onchange="updateImgUrl(${i}, this.value)" style="width:100%; padding:6px 8px; border:1px solid #cbd5e1; border-radius:7px; font-size:0.8rem;">
+                    <div class="admin-field" style="margin-top:0;">
+                        <label>Nombre del producto</label>
+                        <input type="text" value="${escapeAttr(p.nombre)}" onchange="updateField(${i}, 'nombre', this.value)">
+                    </div>
+                    <div class="admin-field">
+                        <label>Descripción</label>
+                        <input type="text" value="${escapeAttr(p.desc)}" onchange="updateField(${i}, 'desc', this.value)">
+                    </div>
+                    <div class="admin-field">
+                        <label>Link de foto (URL directa)</label>
+                        <input type="text" value="${escapeAttr(p.customImg || "")}" placeholder="https://..." onchange="updateImgUrl(${i}, this.value)">
                     </div>
                     <div class="admin-prices">
                         <div>
-                            <label style="font-size:0.7rem; color:var(--text-secondary);">Unitario</label>
+                            <label>Precio unidad</label>
                             <input type="number" value="${p.precioUnitario}" onchange="updatePrice(${i}, 'precioUnitario', this.value)">
                         </div>
                         <div>
-                            <label style="font-size:0.7rem; color:var(--text-secondary);">${p.minMayorista || 3}+ Mayor</label>
+                            <label>Precio 3+ u. (c/u)</label>
                             <input type="number" value="${p.precioMayorista}" onchange="updatePrice(${i}, 'precioMayorista', this.value)">
                         </div>
                         <label class="btn-photo">📷 Foto<input type="file" accept="image/*" style="display:none;" onchange="uploadPhoto(${i}, this)"></label>
                     </div>
                 </div>
             `).join("");
+        }
+
+        function updateField(i, field, val) {
+            state.products[i][field] = val.trim();
+            persistState();
+            renderProducts();
+            updateCartUI();
+            playClickSound();
         }
 
         function updateImgUrl(i, val) {
