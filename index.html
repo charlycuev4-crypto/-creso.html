@@ -1115,7 +1115,7 @@
                     <div class="hero-slide slide-offer-style slide-offer-1">
                         <div class="slide-content">
                             <span class="slide-kicker">🔥 Oferta Mayorista</span>
-                            <div class="slide-title">Llevando 10+ unidades baja el precio por pack</div>
+                            <div class="slide-title">Llevando 3+ unidades baja el precio por pack</div>
                             <p class="slide-sub">Cables desde $650 c/u y cargadores desde $2.000 c/u</p>
                         </div>
                         <div class="slide-visual-badge">💰📦</div>
@@ -1155,7 +1155,7 @@
             <!-- BOTONES DE WHATSAPP Y MAYORISTA ABAJO -->
             <div class="info-strip">
                 <a class="info-chip tech" href="https://wa.me/5491133667793" target="_blank" rel="noopener noreferrer" onclick="playClickSound();">📲 WhatsApp: 11 3366-7793</a>
-                <span class="info-chip gold">📦 10+ u. precio mayorista</span>
+                <span class="info-chip gold">📦 3+ u. precio mayorista</span>
             </div>
         </div>
     </header>
@@ -1191,7 +1191,7 @@
     <main class="container">
         <div class="section-heading">
             <h2>Catálogo disponible</h2>
-            <span>10+ unidades = Precio mayorista automático</span>
+            <span>3+ unidades = Precio mayorista automático</span>
         </div>
         <div class="grid" id="productsGrid"></div>
     </main>
@@ -1441,17 +1441,18 @@
             </svg>`
         };
 
-        /* ========== CATÁLOGO CRESO ========== */
+        /* ========== CATÁLOGO CRESO (MAYORISTA DESDE 3 UNIDADES) ========== */
         const DEFAULT_PRODUCTS = [
-            { id: "bb-micro", nombre: "Cable BlackBerry Micro-USB 0.3m", categoria: "cables", desc: "Cable corto reforzado de 30 cm (ASY-28109-001).", precioUnitario: 900, precioMayorista: 650, minMayorista: 10, badge: "30CM", goldBadge: false, svgKey: "cableBlack", customImg: "" },
-            { id: "stark-micro", nombre: "Cable STARK Micro-USB 3.1A (1m)", categoria: "cables", desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "3.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
-            { id: "x95-lightning", nombre: "Cable CHARGE X95 USB a Lightning", categoria: "cables", desc: "Carga 2A para iPhone/iPad, diseño reforzado.", precioUnitario: 1200, precioMayorista: 800, minMayorista: 10, badge: "10+ OFF", goldBadge: true, svgKey: "cableWhite", customImg: "" },
-            { id: "wk-lightning", nombre: "Cable WK Design Fullspeed Lightning (1m)", categoria: "cables", desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "2.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
-            { id: "kos-tipoc", nombre: "Cargador KOS 2A Carga Rápida Tipo C", categoria: "cargadores", desc: "Fuente de pared 2A + cable Tipo C incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "TIPO C", goldBadge: false, svgKey: "charger", customImg: "" },
-            { id: "kos-micro", nombre: "Cargador KOS 2A Carga Rápida Micro-USB", categoria: "cargadores", desc: "Fuente de pared 2A + cable Micro-USB incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "MICRO-USB", goldBadge: false, svgKey: "charger", customImg: "" },
-            { id: "kosmo-iph", nombre: "Cargador KOSMO 2A Carga Rápida Lightning", categoria: "cargadores", desc: "KOS 2A IPH para iPhone + cable Lightning.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "IPHONE", goldBadge: false, svgKey: "charger", customImg: "" },
-            { id: "pro21-typec", nombre: "Auriculares pro21 Stereo Type-C", categoria: "audio", desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.", precioUnitario: 3500, precioMayorista: 2500, minMayorista: 10, badge: "TYPE-C", goldBadge: true, svgKey: "earphones", customImg: "" },
-            { id: "aux-2m", nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)", categoria: "audio", desc: "Jack 3.5mm macho-macho (B6309), 2 metros.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "2 METROS", goldBadge: false, svgKey: "auxCable", customImg: "" }
+            { id: "samsung-45w-c-a-c", nombre: "Cargador Samsung 45W Super Charger", categoria: "cargadores", desc: "Carga rápida con cable Tipo C a C.", precioUnitario: 9000, precioMayorista: 7500, minMayorista: 3, badge: "45W PD", goldBadge: true, svgKey: "charger", customImg: "" },
+            { id: "bb-micro", nombre: "Cable BlackBerry Micro-USB 0.3m", categoria: "cables", desc: "Cable corto reforzado de 30 cm (ASY-28109-001).", precioUnitario: 900, precioMayorista: 650, minMayorista: 3, badge: "30CM", goldBadge: false, svgKey: "cableBlack", customImg: "" },
+            { id: "stark-micro", nombre: "Cable STARK Micro-USB 3.1A (1m)", categoria: "cables", desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 3, badge: "3.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
+            { id: "x95-lightning", nombre: "Cable CHARGE X95 USB a Lightning", categoria: "cables", desc: "Carga 2A para iPhone/iPad, diseño reforzado.", precioUnitario: 1200, precioMayorista: 800, minMayorista: 3, badge: "3+ OFF", goldBadge: true, svgKey: "cableWhite", customImg: "" },
+            { id: "wk-lightning", nombre: "Cable WK Design Fullspeed Lightning (1m)", categoria: "cables", desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 3, badge: "2.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
+            { id: "kos-tipoc", nombre: "Cargador KOS 2A Carga Rápida Tipo C", categoria: "cargadores", desc: "Fuente de pared 2A + cable Tipo C incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 3, badge: "TIPO C", goldBadge: false, svgKey: "charger", customImg: "" },
+            { id: "kos-micro", nombre: "Cargador KOS 2A Carga Rápida Micro-USB", categoria: "cargadores", desc: "Fuente de pared 2A + cable Micro-USB incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 3, badge: "MICRO-USB", goldBadge: false, svgKey: "charger", customImg: "" },
+            { id: "kosmo-iph", nombre: "Cargador KOSMO 2A Carga Rápida Lightning", categoria: "cargadores", desc: "KOS 2A IPH para iPhone + cable Lightning.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 3, badge: "IPHONE", goldBadge: false, svgKey: "charger", customImg: "" },
+            { id: "pro21-typec", nombre: "Auriculares pro21 Stereo Type-C", categoria: "audio", desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.", precioUnitario: 3500, precioMayorista: 2500, minMayorista: 3, badge: "TYPE-C", goldBadge: true, svgKey: "earphones", customImg: "" },
+            { id: "aux-2m", nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)", categoria: "audio", desc: "Jack 3.5mm macho-macho (B6309), 2 metros.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 3, badge: "2 METROS", goldBadge: false, svgKey: "auxCable", customImg: "" }
         ];
 
         let state = {
@@ -1464,7 +1465,9 @@
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (parsed.whatsapp) state.whatsapp = parsed.whatsapp;
-                if (Array.isArray(parsed.products) && parsed.products.length) state.products = parsed.products;
+                if (Array.isArray(parsed.products) && parsed.products.length) {
+                    state.products = parsed.products.map(p => ({ ...p, minMayorista: p.minMayorista || 3 }));
+                }
             }
         } catch (e) {}
 
@@ -1494,7 +1497,8 @@
         }
 
         function getEffectiveUnitPrice(p, qty) {
-            return qty >= p.minMayorista ? p.precioMayorista : p.precioUnitario;
+            const minMay = p.minMayorista || 3;
+            return qty >= minMay ? p.precioMayorista : p.precioUnitario;
         }
 
         function renderProducts() {
@@ -1517,7 +1521,7 @@
             }
 
             grid.innerHTML = list.map(p => {
-                const minMay = p.minMayorista || 10;
+                const minMay = p.minMayorista || 3;
                 const qty = cart[p.id] ? cart[p.id].cantidad : 0;
                 const rem = Math.max(0, minMay - qty);
                 const pct = Math.min(100, (qty / minMay) * 100);
@@ -1568,7 +1572,7 @@
                 setTimeout(() => { btn.textContent = "➕ Agregar"; btn.classList.remove("added"); }, 1000);
             }
 
-            const minMay = p.minMayorista || 10;
+            const minMay = p.minMayorista || 3;
             showToast(qty >= minMay ? `¡Pack x${qty} ${p.nombre} mayorista!` : `¡${p.nombre} agregado!`, "🛒");
             animateFab();
             renderProducts();
@@ -1607,7 +1611,7 @@
             container.innerHTML = entries.map(e => {
                 const p = state.products.find(x => x.id === e.id);
                 if (!p) return "";
-                const minMay = p.minMayorista || 10;
+                const minMay = p.minMayorista || 3;
                 const unitP = getEffectiveUnitPrice(p, e.cantidad);
                 const sub = unitP * e.cantidad;
                 units += e.cantidad;
@@ -1668,7 +1672,7 @@
             entries.forEach(e => {
                 const p = state.products.find(x => x.id === e.id);
                 if (!p) return;
-                const minMay = p.minMayorista || 10;
+                const minMay = p.minMayorista || 3;
                 const uPrice = getEffectiveUnitPrice(p, e.cantidad);
                 const sub = uPrice * e.cantidad;
                 total += sub;
@@ -1699,7 +1703,7 @@
                             <input type="number" value="${p.precioUnitario}" onchange="updatePrice(${i}, 'precioUnitario', this.value)">
                         </div>
                         <div>
-                            <label style="font-size:0.7rem; color:var(--text-secondary);">${p.minMayorista || 10}+ Mayor</label>
+                            <label style="font-size:0.7rem; color:var(--text-secondary);">${p.minMayorista || 3}+ Mayor</label>
                             <input type="number" value="${p.precioMayorista}" onchange="updatePrice(${i}, 'precioMayorista', this.value)">
                         </div>
                         <label class="btn-photo">📷 Foto<input type="file" accept="image/*" style="display:none;" onchange="uploadPhoto(${i}, this)"></label>
@@ -1776,7 +1780,7 @@
                 if (!resp.ok) return;
                 const data = await resp.json();
                 if (Array.isArray(data) && data.length > 0) {
-                    state.products = data;
+                    state.products = data.map(p => ({ ...p, minMayorista: p.minMayorista || 3 }));
                     persistState();
                     renderProducts();
                     updateCartUI();
