@@ -1180,6 +1180,9 @@
                 <button class="tab" onclick="setCategory('cables', this)">🔌 Cables</button>
                 <button class="tab" onclick="setCategory('cargadores', this)">⚡ Cargadores</button>
                 <button class="tab" onclick="setCategory('audio', this)">🎧 Audio</button>
+                <button class="tab" onclick="setCategory('proyectores', this)">📽️ Proyectores</button>
+                <button class="tab" onclick="setCategory('relojes', this)">⌚ Relojes Android</button>
+                <button class="tab" onclick="setCategory('accesorios', this)">🎮 Celulares y Gadgets</button>
             </div>
         </div>
     </div>
@@ -1761,6 +1764,40 @@
 
         renderProducts();
         updateCartUI();
+    </script>
+
+    <!-- CONEXIÓN CON SUPABASE PARA ARTÍCULOS CARGADOS EN admin-creso.html -->
+    <script type="module">
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+        const SUPABASE_URL = "TU_SUPABASE_URL";
+        const SUPABASE_ANON_KEY = "TU_SUPABASE_ANON_KEY";
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const { data, error } = await supabase
+            .from("creso_productos")
+            .select("*")
+            .order("creado_en", { ascending: false });
+
+        if (!error && Array.isArray(data) && data.length > 0) {
+            const desdeSupabase = data.map(p => ({
+                id: "sb-" + p.id,
+                nombre: p.nombre,
+                categoria: p.categoria || "accesorios",
+                desc: p.descripcion || "",
+                precioUnitario: Number(p.precio_unitario) || 0,
+                precioMayorista: Number(p.precio_mayorista) || Number(p.precio_unitario) || 0,
+                minMayorista: 10,
+                badge: p.badge || "NUEVO",
+                goldBadge: true,
+                svgKey: "charger",
+                customImg: p.imagen_url || ""
+            }));
+
+            state.products = [...desdeSupabase, ...DEFAULT_PRODUCTS];
+            renderProducts();
+            updateCartUI();
+        }
     </script>
 </body>
 </html>
