@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Admin CRESO — Gestión de Productos</title>
+    <title>Admin CRESO — Gestión de Productos (JSON)</title>
     <style>
         :root {
             --brand-primary: #059669;
@@ -75,7 +75,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .preview-img {
             width: 64px;
@@ -94,8 +94,10 @@
             cursor: pointer;
             font-size: 0.92rem;
         }
-        .btn-save { background: var(--brand-dark); color: #fff; width: 100%; margin-top: 6px; }
+        .btn-save { background: var(--brand-dark); color: #fff; width: 100%; margin-top: 8px; }
         .btn-save:hover { background: var(--brand-deeper); }
+        .btn-json { background: #d97706; color: #fff; width: 100%; margin-top: 10px; }
+        .btn-json:hover { background: #b45309; }
         .btn-edit { background: #e0f2fe; color: #0369a1; padding: 7px 11px; font-size: 0.8rem; }
         .btn-del { background: #fee2e2; color: #b91c1c; padding: 7px 11px; font-size: 0.8rem; }
         .status { margin-top: 8px; font-size: 0.85rem; font-weight: 700; color: var(--brand-dark); }
@@ -120,6 +122,7 @@
         .prod-info { flex: 1; min-width: 190px; }
         .prod-meta { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; margin-top: 2px; }
         .prod-actions { display: flex; gap: 6px; }
+        .top-bar-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
         @media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -128,7 +131,7 @@
     <div class="header">
         <div>
             <h1>⚙️ ADMIN CRESO</h1>
-            <p>Cargá artículos nuevos y se reflejan en vivo en la tienda</p>
+            <p>Gestioná los artículos y descargá tu archivo productos.json para GitHub</p>
         </div>
         <a class="btn-store" href="index.html">Ver tienda CRESO →</a>
     </div>
@@ -157,7 +160,7 @@
                 <input type="number" id="precioUnitario" placeholder="6500">
             </div>
             <div>
-                <label>Precio mayorista 3+ ($) *</label>
+                <label>Precio mayorista 10+ ($) *</label>
                 <input type="number" id="precioMayorista" placeholder="5200">
             </div>
             <div>
@@ -165,7 +168,11 @@
                 <input type="text" id="badge" placeholder="Ej: NUEVO / HD / GAMEPAD">
             </div>
             <div>
-                <label>Foto del producto</label>
+                <label>Foto: ruta en repo (ej. img/foto.jpg) o link</label>
+                <input type="text" id="fotoUrl" placeholder="img/proyector.jpg o https://..." oninput="actualizarPreviewDesdeInput()">
+            </div>
+            <div class="full">
+                <label>O elegir archivo de foto desde el dispositivo</label>
                 <input type="file" id="fotoFile" accept="image/*" onchange="procesarFoto(this)">
                 <div class="preview-box">
                     <img id="fotoPreview" class="preview-img" alt="Vista previa">
@@ -177,28 +184,86 @@
                 <input type="text" id="descripcion" placeholder="Características principales del producto...">
             </div>
         </div>
-        <button class="btn btn-save" id="btnGuardar" onclick="guardarProducto()">💾 Publicar en la tienda CRESO</button>
+        <button class="btn btn-save" id="btnGuardar" onclick="guardarProducto()">💾 Guardar en la lista</button>
         <button class="btn" id="btnCancelarEdicion" onclick="limpiarFormulario()" style="display:none; width:100%; margin-top:6px; background:#e2e8f0; color:#334155;">Cancelar edición</button>
         <div class="status" id="estado"></div>
     </div>
 
     <div class="card">
-        <h2>📦 Artículos cargados en Supabase</h2>
-        <div id="listaProductos">Conectando con Supabase...</div>
+        <h2>📦 Artículos cargados</h2>
+        <div class="top-bar-actions">
+            <label class="btn" style="background:#e0f2fe; color:#0369a1; padding:8px 12px; font-size:0.82rem; cursor:pointer; width:auto; margin:0;">
+                📂 Importar productos.json
+                <input type="file" id="importJsonFile" accept=".json,application/json" style="display:none;" onchange="importarJSON(this)">
+            </label>
+            <button class="btn" style="background:#f1f5f9; color:#334155; padding:8px 12px; font-size:0.82rem; width:auto;" onclick="restaurarBase()">↺ Restaurar catálogo base</button>
+        </div>
+
+        <div id="listaProductos"></div>
+
+        <button class="btn btn-json" onclick="descargarJSON()">⬇️ Descargar productos.json</button>
     </div>
 </div>
 
-<script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+<script>
+    const STORAGE_KEY = "creso_admin_json_v1";
 
-    const SUPABASE_URL = "https://hinqiuvbwygqhbabvxrc.supabase.co";
-    const SUPABASE_ANON_KEY = "Sb_publishable_bFgl6XvYSSray5OgNDlx4w_f5D8aN37";
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const BASE_PRODUCTS = [
+        { id: "bb-micro", nombre: "Cable BlackBerry Micro-USB 0.3m", categoria: "cables", desc: "Cable corto reforzado de 30 cm (ASY-28109-001).", precioUnitario: 900, precioMayorista: 650, minMayorista: 10, badge: "30CM", goldBadge: false, svgKey: "cableBlack", customImg: "" },
+        { id: "stark-micro", nombre: "Cable STARK Micro-USB 3.1A (1m)", categoria: "cables", desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "3.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
+        { id: "x95-lightning", nombre: "Cable CHARGE X95 USB a Lightning", categoria: "cables", desc: "Carga 2A para iPhone/iPad, diseño reforzado.", precioUnitario: 1200, precioMayorista: 800, minMayorista: 10, badge: "10+ OFF", goldBadge: true, svgKey: "cableWhite", customImg: "" },
+        { id: "wk-lightning", nombre: "Cable WK Design Fullspeed Lightning (1m)", categoria: "cables", desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "2.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
+        { id: "kos-tipoc", nombre: "Cargador KOS 2A Carga Rápida Tipo C", categoria: "cargadores", desc: "Fuente de pared 2A + cable Tipo C incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "TIPO C", goldBadge: false, svgKey: "charger", customImg: "" },
+        { id: "kos-micro", nombre: "Cargador KOS 2A Carga Rápida Micro-USB", categoria: "cargadores", desc: "Fuente de pared 2A + cable Micro-USB incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "MICRO-USB", goldBadge: false, svgKey: "charger", customImg: "" },
+        { id: "kosmo-iph", nombre: "Cargador KOSMO 2A Carga Rápida Lightning", categoria: "cargadores", desc: "KOS 2A IPH para iPhone + cable Lightning.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "IPHONE", goldBadge: false, svgKey: "charger", customImg: "" },
+        { id: "pro21-typec", nombre: "Auriculares pro21 Stereo Type-C", categoria: "audio", desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.", precioUnitario: 3500, precioMayorista: 2500, minMayorista: 10, badge: "TYPE-C", goldBadge: true, svgKey: "earphones", customImg: "" },
+        { id: "aux-2m", nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)", categoria: "audio", desc: "Jack 3.5mm macho-macho (B6309), 2 metros.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "2 METROS", goldBadge: false, svgKey: "auxCable", customImg: "" }
+    ];
 
-    let fotoActualBase64 = "";
-    let cacheProductos = [];
+    let productos = [];
+    let fotoActual = "";
 
-    window.procesarFoto = function(input) {
+    function cargarInicial() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed) && parsed.length) {
+                    productos = parsed;
+                    renderLista();
+                    return;
+                }
+            }
+        } catch (e) {}
+        productos = JSON.parse(JSON.stringify(BASE_PRODUCTS));
+        guardarLocal();
+        renderLista();
+    }
+
+    function guardarLocal() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(productos)); } catch (e) {}
+    }
+
+    function setPreview(src, label) {
+        const prev = document.getElementById("fotoPreview");
+        const st = document.getElementById("fotoStatus");
+        if (src) {
+            prev.src = src;
+            prev.style.display = "block";
+            st.textContent = label || "Foto cargada";
+        } else {
+            prev.style.display = "none";
+            st.textContent = "Sin foto seleccionada";
+        }
+    }
+
+    function actualizarPreviewDesdeInput() {
+        const val = document.getElementById("fotoUrl").value.trim();
+        fotoActual = val;
+        setPreview(val, val ? "Ruta/enlace de foto" : "Sin foto seleccionada");
+    }
+
+    function procesarFoto(input) {
         const file = input.files && input.files[0];
         if (!file) return;
         const reader = new FileReader();
@@ -206,7 +271,7 @@
             const img = new Image();
             img.onload = () => {
                 const canvas = document.createElement("canvas");
-                const max = 560;
+                const max = 480;
                 let w = img.width, h = img.height;
                 if (w > max || h > max) {
                     if (w > h) { h = Math.round(h * max / w); w = max; }
@@ -215,37 +280,34 @@
                 canvas.width = w;
                 canvas.height = h;
                 canvas.getContext("2d").drawImage(img, 0, 0, w, h);
-                fotoActualBase64 = canvas.toDataURL("image/jpeg", 0.8);
-
-                const prev = document.getElementById("fotoPreview");
-                prev.src = fotoActualBase64;
-                prev.style.display = "block";
-                document.getElementById("fotoStatus").textContent = "✓ Foto lista";
+                fotoActual = canvas.toDataURL("image/jpeg", 0.72);
+                document.getElementById("fotoUrl").value = "";
+                setPreview(fotoActual, "✓ Foto optimizada");
             };
             img.src = e.target.result;
         };
         reader.readAsDataURL(file);
-    };
+    }
 
-    window.limpiarFormulario = function() {
+    function limpiarFormulario() {
         document.getElementById("editId").value = "";
         document.getElementById("formTitle").textContent = "➕ Cargar artículo nuevo";
-        document.getElementById("btnGuardar").textContent = "💾 Publicar en la tienda CRESO";
+        document.getElementById("btnGuardar").textContent = "💾 Guardar en la lista";
         document.getElementById("btnCancelarEdicion").style.display = "none";
         document.getElementById("nombre").value = "";
         document.getElementById("categoria").value = "cables";
         document.getElementById("precioUnitario").value = "";
         document.getElementById("precioMayorista").value = "";
         document.getElementById("badge").value = "";
-        document.getElementById("descripcion").value = "";
+        document.getElementById("fotoUrl").value = "";
         document.getElementById("fotoFile").value = "";
-        document.getElementById("fotoPreview").style.display = "none";
-        document.getElementById("fotoStatus").textContent = "Sin foto seleccionada";
-        fotoActualBase64 = "";
-    };
+        document.getElementById("descripcion").value = "";
+        fotoActual = "";
+        setPreview("", "Sin foto seleccionada");
+    }
 
-    window.editarProducto = function(id) {
-        const p = cacheProductos.find(x => String(x.id) === String(id));
+    function editarProducto(id) {
+        const p = productos.find(x => String(x.id) === String(id));
         if (!p) return;
         document.getElementById("editId").value = p.id;
         document.getElementById("formTitle").textContent = "✏️ Editando: " + p.nombre;
@@ -253,99 +315,118 @@
         document.getElementById("btnCancelarEdicion").style.display = "block";
         document.getElementById("nombre").value = p.nombre || "";
         document.getElementById("categoria").value = p.categoria || "cables";
-        document.getElementById("precioUnitario").value = p.precio_unitario || "";
-        document.getElementById("precioMayorista").value = p.precio_mayorista || "";
+        document.getElementById("precioUnitario").value = p.precioUnitario || "";
+        document.getElementById("precioMayorista").value = p.precioMayorista || "";
         document.getElementById("badge").value = p.badge || "";
-        document.getElementById("descripcion").value = p.descripcion || "";
-        fotoActualBase64 = p.imagen_url || "";
-
-        const prev = document.getElementById("fotoPreview");
-        if (fotoActualBase64) {
-            prev.src = fotoActualBase64;
-            prev.style.display = "block";
-            document.getElementById("fotoStatus").textContent = "Foto actual cargada";
-        } else {
-            prev.style.display = "none";
-            document.getElementById("fotoStatus").textContent = "Sin foto";
-        }
+        document.getElementById("descripcion").value = p.desc || "";
+        fotoActual = p.customImg || "";
+        document.getElementById("fotoUrl").value = fotoActual.startsWith("data:") ? "" : fotoActual;
+        setPreview(fotoActual, fotoActual ? "Foto actual cargada" : "Sin foto");
         window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    }
 
-    window.guardarProducto = async function() {
+    function guardarProducto() {
         const editId = document.getElementById("editId").value.trim();
         const nombre = document.getElementById("nombre").value.trim();
         const categoria = document.getElementById("categoria").value;
-        const precio_unitario = parseInt(document.getElementById("precioUnitario").value, 10);
-        const precio_mayorista = parseInt(document.getElementById("precioMayorista").value, 10);
+        const precioUnitario = parseInt(document.getElementById("precioUnitario").value, 10);
+        const precioMayorista = parseInt(document.getElementById("precioMayorista").value, 10);
         const badge = document.getElementById("badge").value.trim() || "NUEVO";
-        const descripcion = document.getElementById("descripcion").value.trim() || "Disponible en CRESO.";
+        const desc = document.getElementById("descripcion").value.trim() || "Disponible en CRESO.";
+        const urlInput = document.getElementById("fotoUrl").value.trim();
+        const imgFinal = urlInput || fotoActual || "";
 
-        if (!nombre || isNaN(precio_unitario) || precio_unitario <= 0) {
+        if (!nombre || isNaN(precioUnitario) || precioUnitario <= 0) {
             document.getElementById("estado").textContent = "⚠️ Completá el nombre y el precio unitario.";
             return;
         }
 
-        const payload = {
+        const itemData = {
+            id: editId || ("prod-" + Date.now()),
             nombre,
             categoria,
-            descripcion,
-            precio_unitario,
-            precio_mayorista: (!isNaN(precio_mayorista) && precio_mayorista > 0) ? precio_mayorista : precio_unitario,
+            desc,
+            precioUnitario,
+            precioMayorista: (!isNaN(precioMayorista) && precioMayorista > 0) ? precioMayorista : precioUnitario,
+            minMayorista: 10,
             badge,
-            imagen_url: fotoActualBase64
+            goldBadge: true,
+            svgKey: "charger",
+            customImg: imgFinal
         };
 
-        let res;
         if (editId) {
-            res = await supabase.from("creso_productos").update(payload).eq("id", editId);
+            const idx = productos.findIndex(x => String(x.id) === String(editId));
+            if (idx !== -1) productos[idx] = { ...productos[idx], ...itemData };
+            document.getElementById("estado").textContent = "✅ Artículo actualizado. Recordá descargar productos.json para subir a GitHub.";
         } else {
-            res = await supabase.from("creso_productos").insert([payload]);
+            productos.unshift(itemData);
+            document.getElementById("estado").textContent = "✅ Artículo agregado. Recordá descargar productos.json para subir a GitHub.";
         }
 
-        if (res.error) {
-            document.getElementById("estado").textContent = "❌ Error Supabase: " + res.error.message;
-            return;
-        }
-
+        guardarLocal();
         limpiarFormulario();
-        document.getElementById("estado").textContent = editId ? "✅ Artículo actualizado." : "✅ Artículo publicado en CRESO.";
-        cargarProductos();
-    };
+        renderLista();
+    }
 
-    window.borrarProducto = async function(id) {
-        if (!confirm("¿Seguro que querés eliminar este artículo?")) return;
-        const { error } = await supabase.from("creso_productos").delete().eq("id", id);
-        if (error) {
-            document.getElementById("estado").textContent = "❌ Error al borrar: " + error.message;
-            return;
-        }
-        document.getElementById("estado").textContent = "🗑️ Artículo eliminado.";
-        cargarProductos();
-    };
+    function borrarProducto(id) {
+        if (!confirm("¿Seguro que querés eliminar este artículo de la lista?")) return;
+        productos = productos.filter(x => String(x.id) !== String(id));
+        guardarLocal();
+        renderLista();
+        document.getElementById("estado").textContent = "🗑️ Artículo eliminado. Descargá productos.json para actualizar GitHub.";
+    }
 
-    async function cargarProductos() {
-        const { data, error } = await supabase
-            .from("creso_productos")
-            .select("*")
-            .order("creado_en", { ascending: false });
+    function descargarJSON() {
+        const blob = new Blob([JSON.stringify(productos, null, 2)], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "productos.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("estado").textContent = "⬇️ Archivo productos.json descargado. Subilo a la misma carpeta que index.html en GitHub.";
+    }
 
+    function importarJSON(input) {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            try {
+                const parsed = JSON.parse(e.target.result);
+                if (!Array.isArray(parsed)) throw new Error("El JSON debe ser una lista");
+                productos = parsed;
+                guardarLocal();
+                renderLista();
+                document.getElementById("estado").textContent = `📂 Se importaron ${productos.length} artículos desde productos.json.`;
+            } catch (err) {
+                document.getElementById("estado").textContent = "❌ No se pudo leer el JSON: " + err.message;
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    function restaurarBase() {
+        if (!confirm("¿Querés volver al catálogo base inicial?")) return;
+        productos = JSON.parse(JSON.stringify(BASE_PRODUCTS));
+        guardarLocal();
+        renderLista();
+        document.getElementById("estado").textContent = "↺ Catálogo base restaurado.";
+    }
+
+    function renderLista() {
         const box = document.getElementById("listaProductos");
-        if (error) {
-            box.innerHTML = `<p style="color:#b91c1c; font-weight:700;">Error al conectar: ${error.message}</p>`;
+        if (!productos.length) {
+            box.innerHTML = `<p style="color:#475569;">No hay artículos en la lista.</p>`;
             return;
         }
-        cacheProductos = data || [];
-        if (!cacheProductos.length) {
-            box.innerHTML = `<p style="color:#475569;">Todavía no cargaste artículos nuevos. Usá el formulario de arriba.</p>`;
-            return;
-        }
-
-        box.innerHTML = cacheProductos.map(p => `
+        box.innerHTML = productos.map(p => `
             <div class="prod-item">
-                <img class="prod-thumb" src="${p.imagen_url || ""}" alt="${p.nombre}" onerror="this.style.display='none'">
+                <img class="prod-thumb" src="${p.customImg || ""}" alt="${p.nombre}" onerror="this.style.display='none'">
                 <div class="prod-info">
                     <strong>${p.nombre}</strong>
-                    <div class="prod-meta">${p.categoria.toUpperCase()} • Unit: $${Number(p.precio_unitario).toLocaleString("es-AR")} • 3+: $${Number(p.precio_mayorista).toLocaleString("es-AR")}</div>
+                    <div class="prod-meta">${(p.categoria || "").toUpperCase()} • Unit: $${Number(p.precioUnitario || 0).toLocaleString("es-AR")} • 10+: $${Number(p.precioMayorista || 0).toLocaleString("es-AR")}</div>
                 </div>
                 <div class="prod-actions">
                     <button class="btn btn-edit" onclick="editarProducto('${p.id}')">Editar</button>
@@ -355,7 +436,7 @@
         `).join("");
     }
 
-    cargarProductos();
+    cargarInicial();
 </script>
 </body>
 </html>
