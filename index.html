@@ -600,6 +600,7 @@
             object-fit: contain;
             background: #ffffff;
             padding: 4px;
+            display: block;
         }
 
         .card-visual svg {
@@ -908,6 +909,7 @@
             height: 100%;
             object-fit: contain;
             background: #ffffff;
+            display: block;
         }
 
         .cart-item-thumb svg {
@@ -1664,7 +1666,7 @@
         };
 
         try {
-            const saved = localStorage.getItem("creso_store_brand_v3");
+            const saved = localStorage.getItem("creso_store_brand_v4");
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (parsed.whatsapp) state.whatsapp = parsed.whatsapp;
@@ -1678,7 +1680,7 @@
         let currentCategory = "todos";
 
         function persistState() {
-            try { localStorage.setItem("creso_store_brand_v3", JSON.stringify(state)); } catch (e) {}
+            try { localStorage.setItem("creso_store_brand_v4", JSON.stringify(state)); } catch (e) {}
         }
 
         function showToast(msg, icon = "✅") {
@@ -1704,10 +1706,14 @@
             return qty >= minMay ? p.precioMayorista : p.precioUnitario;
         }
 
+        function escapeAttr(val) {
+            return String(val || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+        }
+
         function getProductVisual(p) {
-            const fallbackSvg = (SVG_ICONS[p.svgKey] || SVG_ICONS.cable).replace(/"/g, "&quot;");
-            if (p.customImg) {
-                return `<img src="${p.customImg}" alt="${p.nombre}" loading="eager" onerror="this.onerror=null; this.parentElement.innerHTML='${fallbackSvg}';">`;
+            const cleanUrl = (p.customImg || "").trim();
+            if (cleanUrl) {
+                return `<img src="${escapeAttr(cleanUrl)}" alt="${escapeAttr(p.nombre)}" loading="eager">`;
             }
             return SVG_ICONS[p.svgKey] || SVG_ICONS.cable;
         }
@@ -1929,7 +1935,7 @@
                     <strong style="font-size:0.88rem;">${p.nombre}</strong>
                     <div style="margin-top:6px;">
                         <label style="font-size:0.7rem; color:var(--text-secondary); display:block;">URL directa de foto</label>
-                        <input type="text" value="${p.customImg || ""}" placeholder="https://..." onchange="updateImgUrl(${i}, this.value)" style="width:100%; padding:6px 8px; border:1px solid #cbd5e1; border-radius:7px; font-size:0.8rem;">
+                        <input type="text" value="${escapeAttr(p.customImg || "")}" placeholder="https://..." onchange="updateImgUrl(${i}, this.value)" style="width:100%; padding:6px 8px; border:1px solid #cbd5e1; border-radius:7px; font-size:0.8rem;">
                     </div>
                     <div class="admin-prices">
                         <div>
