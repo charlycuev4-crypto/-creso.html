@@ -807,4 +807,984 @@
             inset: 0;
             background: rgba(15, 23, 42, 0.52);
             backdrop-filter: blur(3px);
-            
+            z-index: 1500;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .drawer-overlay.active { display: block; opacity: 1; }
+
+        .drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 660px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px 24px 0 0;
+            max-height: 88vh;
+            transform: translateY(100%);
+            transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+            z-index: 1600;
+            display: flex;
+            flex-direction: column;
+            border-top: 3px solid var(--brand-primary);
+        }
+
+        .drawer-overlay.active .drawer { transform: translateY(0); }
+
+        .drawer-handle {
+            width: 44px;
+            height: 5px;
+            background: #cbd5e1;
+            border-radius: 999px;
+            margin: 10px auto 6px;
+        }
+
+        .drawer-header {
+            padding: 4px 20px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .drawer-header h2 {
+            font-size: 1.18rem;
+            color: var(--text-main);
+            font-weight: 900;
+        }
+
+        .drawer-close {
+            background: var(--bg-muted);
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .drawer-body {
+            padding: 14px 20px 26px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .cart-item-info h4 { font-size: 0.92rem; color: var(--text-main); }
+        .cart-item-meta { font-size: 0.8rem; color: var(--brand-primary-dark); font-weight: 700; }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-muted);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 3px;
+        }
+
+        .qty-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .qty-controls span { min-width: 22px; text-align: center; font-weight: 800; font-size: 0.88rem; }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .form-group { margin-bottom: 10px; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 11px 12px;
+            background: var(--bg-muted);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 0.92rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: var(--brand-primary);
+        }
+
+        .savings-banner {
+            background: var(--brand-primary-soft);
+            border: 1px solid var(--border-brand);
+            color: var(--brand-primary-dark);
+            padding: 9px 12px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .total-box {
+            margin: 12px 0;
+            padding: 14px;
+            background: var(--bg-muted);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .total-amount {
+            font-size: 1.55rem;
+            font-weight: 900;
+            color: var(--brand-primary-dark);
+        }
+
+        .btn-whatsapp {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 13px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28);
+        }
+
+        .btn-whatsapp:hover { background: #15803d; }
+
+        /* ========== ADMIN PANEL ========== */
+        .admin-box {
+            background: var(--bg-muted);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        .admin-box h3 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .admin-item {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .admin-prices {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 8px;
+            align-items: end;
+            margin-top: 8px;
+        }
+
+        .admin-prices input {
+            width: 100%;
+            padding: 7px 9px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 0.86rem;
+        }
+
+        .btn-photo {
+            background: var(--brand-primary-soft);
+            color: var(--brand-primary-dark);
+            border: 1px dashed var(--brand-primary);
+            padding: 7px 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-save-html {
+            background: var(--brand-primary);
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 28px 16px 10px;
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border-light);
+            margin-top: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .logo { font-size: 1.85rem; letter-spacing: 3px; }
+            .lema { font-size: 0.8rem; }
+            .slide-full-photo img { height: 245px; }
+            .slide-corner-brand { top: 10px; left: 48px; font-size: 0.72rem; padding: 2px 10px; }
+            .slide-offer-style, .slide-brand-gold { min-height: 225px; padding: 22px 38px 40px; }
+            .slide-title { font-size: 1.24rem; }
+            .slide-sub { font-size: 0.84rem; }
+            .slide-visual-badge { font-size: 2.3rem; }
+            .slide-brand-name { font-size: 2.15rem; letter-spacing: 5px; }
+            .info-strip { grid-template-columns: 1fr; gap: 8px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card { padding: 8px; border-width: 2px; }
+            .card-visual { height: 122px; border-width: 1.5px; border-radius: 10px; }
+            .badge { top: 14px; left: 14px; font-size: 0.64rem; padding: 3px 7px; }
+            .card-body { padding: 9px 2px 2px; }
+            .card-title { font-size: 0.92rem; }
+            .card-desc { display: none; }
+            .price-main { font-size: 1.1rem; }
+            .card-actions { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOASTS -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- HEADER SUPERIOR: TÍTULO + BOTONES, CARRUSEL CON FOTO LIMPIA Y BOTONES ABAJO -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand-row">
+                <div class="brand-identity">
+                    <span class="logo">CRESO<span class="logo-dot"></span></span>
+                    <span class="lema">Accesorios móviles • Minorista y Mayorista</span>
+                </div>
+                <div class="top-controls">
+                    <button class="icon-btn active-sound" id="soundToggleBtn" onclick="toggleSound()" title="Sonido">🔊</button>
+                    <button class="icon-btn" onclick="playClickSound(); toggleAdmin();" title="Configurar">⚙️</button>
+                </div>
+            </div>
+
+            <!-- CARRUSEL / RULETA ARRIBA DE TODO CON LA FOTO LIMPIA SIN TÍTULOS ENCIMA -->
+            <div class="hero-carousel" id="heroCarousel">
+                <div class="hero-slides" id="heroSlides">
+                    <!-- Cuadro 1: Foto limpia de CRESO sin títulos tapando -->
+                    <div class="hero-slide slide-full-photo">
+                        <span class="slide-corner-brand">CRESO</span>
+                        <img src="https://i.ibb.co/G45tqcrn/IMG-20261120-WA0000.jpg" alt="CRESO">
+                    </div>
+
+                    <!-- Cuadro 2: Oferta Mayorista -->
+                    <div class="hero-slide slide-offer-style slide-offer-1">
+                        <div class="slide-content">
+                            <span class="slide-kicker">🔥 Oferta Mayorista</span>
+                            <div class="slide-title">Llevando 10+ unidades baja el precio por pack</div>
+                            <p class="slide-sub">Cables desde $650 c/u y cargadores desde $2.000 c/u</p>
+                        </div>
+                        <div class="slide-visual-badge">💰📦</div>
+                    </div>
+
+                    <!-- Cuadro 3: Oferta Audio y Conexión -->
+                    <div class="hero-slide slide-offer-style slide-offer-2">
+                        <div class="slide-content">
+                            <span class="slide-kicker">🎧 Audio &amp; Conexión</span>
+                            <div class="slide-title">Auriculares Type-C, Auxiliar 2m y Cables</div>
+                            <p class="slide-sub">Armá tu carrito y enviá tu pedido por WhatsApp</p>
+                        </div>
+                        <div class="slide-visual-badge">🎧🔌</div>
+                    </div>
+
+                    <!-- Cuadro 4: Cierre con CRESO en dorado sobre fondo verde -->
+                    <div class="hero-slide slide-brand-gold">
+                        <div class="slide-brand-showcase">
+                            <span class="slide-kicker">✨ Sello Oficial</span>
+                            <div class="slide-brand-name">CRESO</div>
+                            <div class="slide-brand-tag">Confianza • Finanzas • Abundancia</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-arrow prev" onclick="prevSlide()" aria-label="Anterior">‹</button>
+                <button class="carousel-arrow next" onclick="nextSlide()" aria-label="Siguiente">›</button>
+
+                <div class="carousel-dots" id="carouselDots">
+                    <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Foto CRESO"></button>
+                    <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Oferta Mayorista"></button>
+                    <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Audio y Conexión"></button>
+                    <button class="carousel-dot" onclick="goToSlide(3)" aria-label="Marca CRESO"></button>
+                </div>
+            </div>
+
+            <!-- BOTONES DE WHATSAPP Y MAYORISTA ABAJO -->
+            <div class="info-strip">
+                <a class="info-chip tech" href="https://wa.me/5491133667793" target="_blank" rel="noopener noreferrer" onclick="playClickSound();">📲 WhatsApp: 11 3366-7793</a>
+                <span class="info-chip gold">📦 10+ u. precio mayorista</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- BUSCADOR Y CATEGORÍAS STICKY -->
+    <div class="sticky-bar">
+        <div class="sticky-inner">
+            <div class="search-row">
+                <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Buscar en CRESO: cable, cargador, Tipo C, Lightning, audio..." oninput="renderProducts()">
+                </div>
+                <select class="sort-select" id="sortSelect" onchange="playClickSound(); renderProducts();">
+                    <option value="default">Destacados</option>
+                    <option value="price-asc">Menor precio</option>
+                    <option value="price-desc">Mayor precio</option>
+                </select>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="setCategory('todos', this)">Todos</button>
+                <button class="tab" onclick="setCategory('cables', this)">🔌 Cables</button>
+                <button class="tab" onclick="setCategory('cargadores', this)">⚡ Cargadores</button>
+                <button class="tab" onclick="setCategory('audio', this)">🎧 Audio</button>
+                <button class="tab" onclick="setCategory('proyectores', this)">📽️ Proyectores</button>
+                <button class="tab" onclick="setCategory('relojes', this)">⌚ Relojes Android</button>
+                <button class="tab" onclick="setCategory('accesorios', this)">🎮 Celulares y Gadgets</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRILLA DE PRODUCTOS -->
+    <main class="container">
+        <div class="section-heading">
+            <h2>Catálogo disponible</h2>
+            <span>10+ unidades = Precio mayorista automático</span>
+        </div>
+        <div class="grid" id="productsGrid"></div>
+    </main>
+
+    <!-- BOTÓN FLOTANTE DEL CARRITO -->
+    <button class="cart-fab" id="cartFab" onclick="playClickSound(); toggleCart();" aria-label="Abrir carrito">
+        🛒
+        <span class="cart-fab-badge" id="cartFabBadge">0</span>
+        <span class="cart-fab-total" id="cartFabTotal">$0</span>
+    </button>
+
+    <!-- DRAWER CARRITO -->
+    <div class="drawer-overlay" id="cartDrawerOverlay" onclick="toggleCart()">
+        <div class="drawer" onclick="event.stopPropagation()">
+            <div class="drawer-handle"></div>
+            <div class="drawer-header">
+                <h2>🛒 Tu pedido — CRESO</h2>
+                <button class="drawer-close" onclick="playClickSound(); toggleCart();">✕</button>
+            </div>
+            <div class="drawer-body">
+                <div id="cartItems"></div>
+                <div id="savingsContainer"></div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>👤 Tu nombre *</label>
+                        <input type="text" id="clienteNombre" placeholder="Ej: Lucas Fernández">
+                    </div>
+                    <div class="form-group">
+                        <label>📱 Tu teléfono *</label>
+                        <input type="tel" id="clienteTel" placeholder="11 1234-5678">
+                    </div>
+                    <div class="form-group">
+                        <label>🚚 Entrega</label>
+                        <select id="clienteEntrega" onchange="playClickSound(); toggleDireccionField();">
+                            <option value="Envío a coordinar">🚚 Envío a coordinar</option>
+                            <option value="Retiro a coordinar">📍 Retiro a coordinar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>💳 Forma de pago</label>
+                        <select id="clientePago" onchange="playClickSound();">
+                            <option value="Efectivo">💵 Efectivo</option>
+                            <option value="Transferencia">🏦 Transferencia</option>
+                            <option value="Efectivo + Transferencia">💵 + 🏦 Efectivo + Transferencia</option>
+                        </select>
+                    </div>
+                    <div class="form-group full" id="direccionGroup">
+                        <label>📍 Dirección o zona *</label>
+                        <input type="text" id="clienteDireccion" placeholder="Calle, altura o zona de entrega...">
+                    </div>
+                    <div class="form-group full">
+                        <label>📝 Notas (opcional)</label>
+                        <input type="text" id="clienteNotas" placeholder="Aclaraciones de entrega o pago...">
+                    </div>
+                </div>
+
+                <div class="total-box">
+                    <div class="total-amount" id="totalPrice">Total: $0</div>
+                </div>
+
+                <button class="btn-whatsapp" onclick="sendOrder()">
+                    📲 Enviar pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRAWER CONFIGURACIÓN -->
+    <div class="drawer-overlay" id="adminDrawerOverlay" onclick="toggleAdmin()">
+        <div class="drawer" onclick="event.stopPropagation()">
+            <div class="drawer-handle"></div>
+            <div class="drawer-header">
+                <h2>⚙️ Configurar CRESO</h2>
+                <button class="drawer-close" onclick="playClickSound(); toggleAdmin();">✕</button>
+            </div>
+            <div class="drawer-body">
+                <div class="admin-box">
+                    <h3>📲 WhatsApp de ventas</h3>
+                    <input type="text" id="adminWhatsapp" value="5491133667793" onchange="saveSettings()" style="width:100%; padding:10px; border:1px solid #cbd5e1; border-radius:8px;">
+                </div>
+
+                <div class="admin-box">
+                    <h3>📦 Precios y fotos incrustadas</h3>
+                    <div id="adminProductsList"></div>
+                </div>
+
+                <button class="btn-save-html" onclick="exportStandaloneHTML()">
+                    💾 Descargar index.html con precios y fotos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <strong style="color: var(--brand-primary-dark);">CRESO</strong> • WhatsApp: +54 9 11 3366-7793 • Pedidos por WhatsApp
+    </footer>
+
+    <script>
+        /* ========== CARRUSEL / RULETA ARRIBA CON FOTO LIMPIA + OFERTAS + CIERRE DORADO ========== */
+        const TOTAL_SLIDES = 4;
+        let currentSlide = 0;
+        let slideTimer = null;
+
+        function updateCarousel() {
+            const track = document.getElementById("heroSlides");
+            const dots = document.querySelectorAll(".carousel-dot");
+            if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle("active", i === currentSlide));
+        }
+
+        function goToSlide(index, manual = false) {
+            if (manual) playClickSound();
+            currentSlide = (index + TOTAL_SLIDES) % TOTAL_SLIDES;
+            updateCarousel();
+            restartSlideTimer();
+        }
+
+        function nextSlide() { goToSlide(currentSlide + 1, true); }
+        function prevSlide() { goToSlide(currentSlide - 1, true); }
+
+        function restartSlideTimer() {
+            if (slideTimer) clearInterval(slideTimer);
+            const delay = currentSlide === TOTAL_SLIDES - 1 ? 4500 : 3200;
+            slideTimer = setTimeout(() => {
+                currentSlide = (currentSlide + 1) % TOTAL_SLIDES;
+                updateCarousel();
+                restartSlideTimer();
+            }, delay);
+        }
+
+        (function setupSwipe() {
+            const box = document.getElementById("heroCarousel");
+            if (!box) return;
+            let startX = 0;
+            box.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive: true });
+            box.addEventListener("touchend", e => {
+                const diff = e.changedTouches[0].clientX - startX;
+                if (Math.abs(diff) > 40) {
+                    if (diff < 0) nextSlide();
+                    else prevSlide();
+                }
+            }, { passive: true });
+        })();
+
+        restartSlideTimer();
+
+        /* ========== SONIDO SUTIL AL TOCAR ========== */
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                const Ctx = window.AudioContext || window.webkitAudioContext;
+                if (Ctx) audioCtx = new Ctx();
+            }
+            if (audioCtx && audioCtx.state === "suspended") audioCtx.resume().catch(() => {});
+            return audioCtx;
+        }
+
+        function playClickSound() {
+            if (!soundEnabled) return;
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(580, now);
+            osc.frequency.exponentialRampToValueAtTime(860, now + 0.05);
+            gain.gain.setValueAtTime(0.055, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.06);
+        }
+
+        function playAddSound() {
+            if (!soundEnabled) return;
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            [587.33, 880].forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "triangle";
+                const t = now + i * 0.065;
+                osc.frequency.setValueAtTime(freq, t);
+                gain.gain.setValueAtTime(0.075, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.11);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(t);
+                osc.stop(t + 0.12);
+            });
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById("soundToggleBtn");
+            btn.textContent = soundEnabled ? "🔊" : "🔇";
+            btn.classList.toggle("active-sound", soundEnabled);
+            if (soundEnabled) { playAddSound(); showToast("Sonido activado", "🔊"); }
+            else { showToast("Sonido silenciado", "🔇"); }
+        }
+
+        /* ========== GRÁFICOS SVG AUTOCONTENIDOS ========== */
+        const SVG_ICONS = {
+            cableBlack: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="36" width="180" height="88" rx="14" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
+                <path d="M64 80C64 58 176 58 176 80C176 102 64 102 64 80Z" stroke="#a7f3d0" stroke-width="10"/>
+                <path d="M64 80C64 58 176 58 176 80C176 102 64 102 64 80Z" stroke="#047857" stroke-width="2.5" stroke-dasharray="5 4"/>
+                <rect x="46" y="68" width="24" height="24" rx="4" fill="#0f172a"/>
+                <rect x="170" y="71" width="22" height="18" rx="3" fill="#0284c7"/>
+                <text x="120" y="142" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">MICRO-USB 0.3M</text>
+            </svg>`,
+            cableWhite: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M56 116C56 54 184 54 184 116" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+                <path d="M56 116C56 54 184 54 184 116" stroke="#047857" stroke-width="2.2" stroke-linecap="round"/>
+                <rect x="44" y="104" width="24" height="30" rx="5" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
+                <rect x="172" y="106" width="22" height="26" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="2.2"/>
+                <text x="120" y="34" fill="#064e3b" font-size="11.5" font-family="sans-serif" font-weight="bold" text-anchor="middle">CARGA RÁPIDA • 1M</text>
+            </svg>`,
+            charger: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="80" y="42" width="80" height="76" rx="14" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
+                <rect x="80" y="42" width="80" height="17" rx="6" fill="#047857"/>
+                <rect x="98" y="22" width="8" height="20" rx="2" fill="#064e3b"/>
+                <rect x="134" y="22" width="8" height="20" rx="2" fill="#064e3b"/>
+                <path d="M124 72L112 90H122L116 107L132 88H121L124 72Z" fill="#f59e0b"/>
+                <text x="120" y="140" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">FUENTE 2A + CABLE</text>
+            </svg>`,
+            earphones: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="88" cy="64" r="21" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+                <circle cx="88" cy="64" r="9" fill="#0284c7"/>
+                <circle cx="152" cy="64" r="21" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+                <circle cx="152" cy="64" r="9" fill="#0284c7"/>
+                <path d="M88 85V112C88 124 120 124 120 135M152 85V112C152 124 120 124 120 135" stroke="#047857" stroke-width="4" stroke-linecap="round"/>
+                <rect x="112" y="132" width="16" height="14" rx="3" fill="#f59e0b"/>
+                <text x="120" y="28" fill="#0369a1" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">TYPE-C STEREO</text>
+            </svg>`,
+            auxCable: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M54 110C54 46 186 46 186 110" stroke="#047857" stroke-width="8" stroke-linecap="round"/>
+                <rect x="46" y="102" width="16" height="22" rx="3" fill="#ffffff" stroke="#064e3b" stroke-width="2.2"/>
+                <rect x="178" y="102" width="16" height="22" rx="3" fill="#ffffff" stroke="#064e3b" stroke-width="2.2"/>
+                <text x="120" y="142" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">AUX 3.5MM • 2 METROS</text>
+            </svg>`
+        };
+
+        /* ========== CATÁLOGO CRESO ========== */
+        const DEFAULT_PRODUCTS = [
+            { id: "bb-micro", nombre: "Cable BlackBerry Micro-USB 0.3m", categoria: "cables", desc: "Cable corto reforzado de 30 cm (ASY-28109-001).", precioUnitario: 900, precioMayorista: 650, minMayorista: 10, badge: "30CM", goldBadge: false, svgKey: "cableBlack", customImg: "" },
+            { id: "stark-micro", nombre: "Cable STARK Micro-USB 3.1A (1m)", categoria: "cables", desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "3.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
+            { id: "x95-lightning", nombre: "Cable CHARGE X95 USB a Lightning", categoria: "cables", desc: "Carga 2A para iPhone/iPad, diseño reforzado.", precioUnitario: 1200, precioMayorista: 800, minMayorista: 10, badge: "10+ OFF", goldBadge: true, svgKey: "cableWhite", customImg: "" },
+            { id: "wk-lightning", nombre: "Cable WK Design Fullspeed Lightning (1m)", categoria: "cables", desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "2.1A", goldBadge: false, svgKey: "cableWhite", customImg: "" },
+            { id: "kos-tipoc", nombre: "Cargador KOS 2A Carga Rápida Tipo C", categoria: "cargadores", desc: "Fuente de pared 2A + cable Tipo C incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "TIPO C", goldBadge: false, svgKey: "charger", customImg: "" },
+            { id: "kos-micro", nombre: "Cargador KOS 2A Carga Rápida Micro-USB", categoria: "cargadores", desc: "Fuente de pared 2A + cable Micro-USB incluido.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "MICRO-USB", goldBadge: false, svgKey: "charger", customImg: "" },
+            { id: "kosmo-iph", nombre: "Cargador KOSMO 2A Carga Rápida Lightning", categoria: "cargadores", desc: "KOS 2A IPH para iPhone + cable Lightning.", precioUnitario: 2800, precioMayorista: 2000, minMayorista: 10, badge: "IPHONE", goldBadge: false, svgKey: "charger", customImg: "" },
+            { id: "pro21-typec", nombre: "Auriculares pro21 Stereo Type-C", categoria: "audio", desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.", precioUnitario: 3500, precioMayorista: 2500, minMayorista: 10, badge: "TYPE-C", goldBadge: true, svgKey: "earphones", customImg: "" },
+            { id: "aux-2m", nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)", categoria: "audio", desc: "Jack 3.5mm macho-macho (B6309), 2 metros.", precioUnitario: 1400, precioMayorista: 1000, minMayorista: 10, badge: "2 METROS", goldBadge: false, svgKey: "auxCable", customImg: "" }
+        ];
+
+        let state = {
+            whatsapp: "5491133667793",
+            products: JSON.parse(JSON.stringify(DEFAULT_PRODUCTS))
+        };
+
+        try {
+            const saved = localStorage.getItem("creso_store_brand_v1");
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (parsed.whatsapp) state.whatsapp = parsed.whatsapp;
+                if (Array.isArray(parsed.products) && parsed.products.length) state.products = parsed.products;
+            }
+        } catch (e) {}
+
+        let cart = {};
+        let currentCategory = "todos";
+
+        function persistState() {
+            try { localStorage.setItem("creso_store_brand_v1", JSON.stringify(state)); } catch (e) {}
+        }
+
+        function showToast(msg, icon = "✅") {
+            const c = document.getElementById("toastContainer");
+            const t = document.createElement("div");
+            t.className = "toast";
+            t.innerHTML = `<span class="toast-icon">${icon}</span><span class="toast-text">${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
+            c.appendChild(t);
+            requestAnimationFrame(() => t.classList.add("show"));
+            setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 380); }, 2600);
+        }
+
+        function setCategory(cat, el) {
+            playClickSound();
+            currentCategory = cat;
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            if (el) el.classList.add("active");
+            renderProducts();
+        }
+
+        function getEffectiveUnitPrice(p, qty) {
+            return qty >= p.minMayorista ? p.precioMayorista : p.precioUnitario;
+        }
+
+        function renderProducts() {
+            const q = document.getElementById("searchInput").value.trim().toLowerCase();
+            const sort = document.getElementById("sortSelect").value;
+            const grid = document.getElementById("productsGrid");
+
+            let list = state.products.filter(p => {
+                const matchCat = currentCategory === "todos" || p.categoria === currentCategory;
+                const matchQ = !q || p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+                return matchCat && matchQ;
+            });
+
+            if (sort === "price-asc") list.sort((a, b) => a.precioUnitario - b.precioUnitario);
+            if (sort === "price-desc") list.sort((a, b) => b.precioUnitario - a.precioUnitario);
+
+            if (!list.length) {
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px 16px; color:var(--text-secondary);">Sin resultados para "${q}".</div>`;
+                return;
+            }
+
+            grid.innerHTML = list.map(p => {
+                const minMay = p.minMayorista || 10;
+                const qty = cart[p.id] ? cart[p.id].cantidad : 0;
+                const rem = Math.max(0, minMay - qty);
+                const pct = Math.min(100, (qty / minMay) * 100);
+                const unlocked = qty >= minMay;
+                const visual = p.customImg ? `<img src="${p.customImg}" alt="${p.nombre}">` : (SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite);
+
+                return `
+                <article class="card" id="card-${p.id}">
+                    ${p.badge ? `<span class="badge ${p.goldBadge ? "gold-badge" : ""}">${p.badge}</span>` : ""}
+                    <div class="card-visual">${visual}</div>
+                    <div class="card-body">
+                        <span class="card-cat">${p.categoria}</span>
+                        <h3 class="card-title">${p.nombre}</h3>
+                        <p class="card-desc">${p.desc}</p>
+                        <div class="price-row">
+                            <span class="price-main">$${p.precioUnitario.toLocaleString("es-AR")}</span>
+                            <span class="price-wholesale">${minMay}+: $${p.precioMayorista.toLocaleString("es-AR")}</span>
+                        </div>
+                        <div class="progress-mini">
+                            <div class="progress-label ${unlocked ? "done" : ""}">
+                                <span>${unlocked ? "✓ Mayorista activo" : (qty > 0 ? `${qty} en carrito` : `Mayorista ${minMay}+ u.`)}</span>
+                                <span>${unlocked ? "" : `Faltan ${rem}`}</span>
+                            </div>
+                            <div class="bar-bg"><div class="bar-fill" style="width:${pct}%"></div></div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-add" id="btn-${p.id}" onclick="addToCart('${p.id}', 1)">➕ Agregar</button>
+                            <button class="btn-pack" onclick="addToCart('${p.id}', ${minMay})">+${minMay}</button>
+                        </div>
+                    </div>
+                </article>`;
+            }).join("");
+        }
+
+        function addToCart(id, qty) {
+            const p = state.products.find(item => item.id === id);
+            if (!p) return;
+            cart[id] = cart[id] ? { id, cantidad: cart[id].cantidad + qty } : { id, cantidad: qty };
+            playAddSound();
+
+            const card = document.getElementById(`card-${id}`);
+            if (card) { card.classList.remove("added-anim"); void card.offsetWidth; card.classList.add("added-anim"); }
+
+            const btn = document.getElementById(`btn-${id}`);
+            if (btn && qty === 1) {
+                btn.textContent = "✓ Sumado";
+                btn.classList.add("added");
+                setTimeout(() => { btn.textContent = "➕ Agregar"; btn.classList.remove("added"); }, 1000);
+            }
+
+            const minMay = p.minMayorista || 10;
+            showToast(qty >= minMay ? `¡Pack x${qty} ${p.nombre} mayorista!` : `¡${p.nombre} agregado!`, "🛒");
+            animateFab();
+            renderProducts();
+            updateCartUI();
+        }
+
+        function animateFab() {
+            const fab = document.getElementById("cartFab");
+            const badge = document.getElementById("cartFabBadge");
+            fab.classList.remove("bounce"); void fab.offsetWidth; fab.classList.add("bounce");
+            badge.classList.remove("pop"); void badge.offsetWidth; badge.classList.add("pop");
+        }
+
+        function updateQty(id, delta) {
+            if (!cart[id]) return;
+            playClickSound();
+            cart[id].cantidad += delta;
+            if (cart[id].cantidad <= 0) delete cart[id];
+            renderProducts();
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const entries = Object.values(cart);
+            const container = document.getElementById("cartItems");
+            if (!entries.length) {
+                container.innerHTML = `<div style="text-align:center; padding:28px 12px; color:var(--text-secondary);">Tu carrito está vacío. Agregá productos para armar tu pedido.</div>`;
+                document.getElementById("savingsContainer").innerHTML = "";
+                document.getElementById("cartFabBadge").textContent = "0";
+                document.getElementById("cartFabTotal").textContent = "$0";
+                document.getElementById("totalPrice").textContent = "Total: $0";
+                return;
+            }
+
+            let units = 0, regularSum = 0, finalSum = 0;
+            container.innerHTML = entries.map(e => {
+                const p = state.products.find(x => x.id === e.id);
+                if (!p) return "";
+                const minMay = p.minMayorista || 10;
+                const unitP = getEffectiveUnitPrice(p, e.cantidad);
+                const sub = unitP * e.cantidad;
+                units += e.cantidad;
+                regularSum += p.precioUnitario * e.cantidad;
+                finalSum += sub;
+
+                return `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <h4>${p.nombre}</h4>
+                        <div class="cart-item-meta">$${unitP.toLocaleString("es-AR")} c/u ${e.cantidad >= minMay ? "• MAYORISTA" : ""}</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQty('${p.id}', -1)">−</button>
+                        <span>${e.cantidad}</span>
+                        <button class="qty-btn" onclick="updateQty('${p.id}', 1)">+</button>
+                    </div>
+                    <strong style="min-width:74px; text-align:right; font-size:0.9rem;">$${sub.toLocaleString("es-AR")}</strong>
+                </div>`;
+            }).join("");
+
+            const saved = regularSum - finalSum;
+            document.getElementById("savingsContainer").innerHTML = saved > 0
+                ? `<div class="savings-banner">🎉 Ahorrás $${saved.toLocaleString("es-AR")} con precio mayorista</div>`
+                : "";
+
+            document.getElementById("cartFabBadge").textContent = units;
+            document.getElementById("cartFabTotal").textContent = `$${finalSum.toLocaleString("es-AR")}`;
+            document.getElementById("totalPrice").textContent = `Total: $${finalSum.toLocaleString("es-AR")}`;
+        }
+
+        function toggleCart() { document.getElementById("cartDrawerOverlay").classList.toggle("active"); }
+        function toggleDireccionField() {
+            const v = document.getElementById("clienteEntrega").value;
+            document.getElementById("direccionGroup").style.display = v === "Retiro a coordinar" ? "none" : "block";
+        }
+
+        function sendOrder() {
+            const entries = Object.values(cart);
+            if (!entries.length) { showToast("Agregá algún producto primero", "🛒"); return; }
+
+            const nombre = document.getElementById("clienteNombre").value.trim();
+            const tel = document.getElementById("clienteTel").value.trim();
+            const entrega = document.getElementById("clienteEntrega").value;
+            const pago = document.getElementById("clientePago").value;
+            const dir = document.getElementById("clienteDireccion").value.trim();
+            const notas = document.getElementById("clienteNotas").value.trim();
+
+            if (!nombre || !tel) { showToast("Completá nombre y teléfono", "⚠️"); return; }
+            if (entrega === "Envío a coordinar" && !dir) { showToast("Completá dirección o zona", "📍"); return; }
+
+            playAddSound();
+            let total = 0;
+            let msg = `*PEDIDO CRESO*\n👤 *Cliente:* ${nombre}\n📱 *Tel:* ${tel}\n🚚 *Entrega:* ${entrega}\n`;
+            if (entrega === "Envío a coordinar") msg += `📍 *Dirección:* ${dir}\n`;
+            msg += `💳 *Pago:* ${pago}\n\n*DETALLE:*\n`;
+
+            entries.forEach(e => {
+                const p = state.products.find(x => x.id === e.id);
+                if (!p) return;
+                const minMay = p.minMayorista || 10;
+                const uPrice = getEffectiveUnitPrice(p, e.cantidad);
+                const sub = uPrice * e.cantidad;
+                total += sub;
+                msg += `• ${e.cantidad}x ${p.nombre}${e.cantidad >= minMay ? " [Mayorista]" : ""} — $${sub.toLocaleString("es-AR")}\n`;
+            });
+
+            msg += `\n💰 *Total (${pago}): $${total.toLocaleString("es-AR")}*`;
+            if (notas) msg += `\n📝 *Notas:* ${notas}`;
+
+            const phone = state.whatsapp.replace(/\D/g, "") || "5491133667793";
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank");
+        }
+
+        function toggleAdmin() {
+            const ov = document.getElementById("adminDrawerOverlay");
+            ov.classList.toggle("active");
+            if (ov.classList.contains("active")) renderAdmin();
+        }
+
+        function renderAdmin() {
+            document.getElementById("adminWhatsapp").value = state.whatsapp;
+            document.getElementById("adminProductsList").innerHTML = state.products.map((p, i) => `
+                <div class="admin-item">
+                    <strong style="font-size:0.88rem;">${p.nombre}</strong>
+                    <div class="admin-prices">
+                        <div>
+                            <label style="font-size:0.7rem; color:var(--text-secondary);">Unitario</label>
+                            <input type="number" value="${p.precioUnitario}" onchange="updatePrice(${i}, 'precioUnitario', this.value)">
+                        </div>
+                        <div>
+                            <label style="font-size:0.7rem; color:var(--text-secondary);">${p.minMayorista || 10}+ Mayor</label>
+                            <input type="number" value="${p.precioMayorista}" onchange="updatePrice(${i}, 'precioMayorista', this.value)">
+                        </div>
+                        <label class="btn-photo">📷 Foto<input type="file" accept="image/*" style="display:none;" onchange="uploadPhoto(${i}, this)"></label>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function saveSettings() {
+            state.whatsapp = document.getElementById("adminWhatsapp").value.trim() || state.whatsapp;
+            persistState();
+            playClickSound();
+            showToast("WhatsApp guardado", "✅");
+        }
+
+        function updatePrice(i, field, val) {
+            const n = parseInt(val, 10);
+            if (!isNaN(n) && n >= 0) {
+                state.products[i][field] = n;
+                persistState();
+                renderProducts();
+                updateCartUI();
+                playClickSound();
+            }
+        }
+
+        function uploadPhoto(i, input) {
+            const file = input.files && input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const max = 520;
+                    let w = img.width, h = img.height;
+                    if (w > max || h > max) {
+                        if (w > h) { h = Math.round(h * max / w); w = max; }
+                        else { w = Math.round(w * max / h); h = max; }
+                    }
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+                    state.products[i].customImg = canvas.toDataURL("image/jpeg", 0.78);
+                    persistState();
+                    renderProducts();
+                    playAddSound();
+                    showToast("Foto guardada en CRESO", "📷");
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function exportStandaloneHTML() {
+            let html = document.documentElement.outerHTML;
+            html = html.replace(/const DEFAULT_PRODUCTS = \[[\s\S]*?\];/, `const DEFAULT_PRODUCTS = ${JSON.stringify(state.products, null, 2)};`);
+            html = html.replace(/whatsapp:\s*"[^"]*"/, `whatsapp: "${state.whatsapp.replace(/"/g, "")}"`);
+            const blob = new Blob(["<!DOCTYPE html>\n" + html], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url; a.download = "index.html"; a.click();
+            URL.revokeObjectURL(url);
+            playAddSound();
+            showToast("¡index.html descargado!", "💾");
+        }
+
+        renderProducts();
+        updateCartUI();
+
+        /* ========== CONEXIÓN CON productos.json (SIN SUPABASE NI LLAVES API) ========== */
+        (async function cargarCatalogoJSON() {
+            try {
+                const resp = await fetch("./productos.json?v=" + Date.now(), { cache: "no-store" });
+                if (!resp.ok) return;
+                const data = await resp.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    state.products = data;
+                    persistState();
+                    renderProducts();
+                    updateCartUI();
+                }
+            } catch (e) {
+                // Si se abre local sin servidor, mantiene state.products / DEFAULT_PRODUCTS
+            }
+        })();
+    </script>
+</body>
+</html>
