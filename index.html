@@ -171,7 +171,7 @@
             border-color: #a7f3d0;
         }
 
-        /* CARRUSEL / RULETA ARRIBA DE TODO CON FOTO LIMPIA ADENTRO */
+        /* CARRUSEL / RULETA */
         .hero-carousel {
             position: relative;
             border-radius: 18px;
@@ -1148,7 +1148,7 @@
                         <div class="slide-content">
                             <span class="slide-kicker">🔥 Oferta Mayorista</span>
                             <div class="slide-title">Llevando 3+ unidades baja el precio por pack</div>
-                            <p class="slide-sub">Cables desde $650 c/u y cargadores desde $2.000 c/u</p>
+                            <p class="slide-sub">Cables desde $2.500 c/u y cargadores desde $3.000 c/u</p>
                         </div>
                         <div class="slide-visual-badge">💰📦</div>
                     </div>
@@ -1156,7 +1156,7 @@
                     <div class="hero-slide slide-offer-style slide-offer-2">
                         <div class="slide-content">
                             <span class="slide-kicker">🎧 Audio &amp; Conexión</span>
-                            <div class="slide-title">Auriculares Type-C, Auxiliar 2m y Cables</div>
+                            <div class="slide-title">Auriculares Wireless, Handsfree y Cables</div>
                             <p class="slide-sub">Armá tu carrito y enviá tu pedido por WhatsApp</p>
                         </div>
                         <div class="slide-visual-badge">🎧🔌</div>
@@ -1196,7 +1196,7 @@
             <div class="search-row">
                 <div class="search-box">
                     <span class="search-icon">🔍</span>
-                    <input type="text" id="searchInput" placeholder="Buscar en CRESO: cable, cargador, Tipo C, Lightning, audio..." oninput="renderProducts()">
+                    <input type="text" id="searchInput" placeholder="Buscar en CRESO: cable, cargador, Tipo C, auriculares, game box..." oninput="renderProducts()">
                 </div>
                 <select class="sort-select" id="sortSelect" onchange="playClickSound(); renderProducts();">
                     <option value="default">Destacados</option>
@@ -1207,12 +1207,10 @@
 
             <div class="tabs">
                 <button class="tab active" onclick="setCategory('todos', this)">Todos</button>
-                <button class="tab" onclick="setCategory('cables', this)">🔌 Cables</button>
                 <button class="tab" onclick="setCategory('cargadores', this)">⚡ Cargadores</button>
                 <button class="tab" onclick="setCategory('audio', this)">🎧 Audio</button>
-                <button class="tab" onclick="setCategory('proyectores', this)">📽️ Proyectores</button>
-                <button class="tab" onclick="setCategory('relojes', this)">⌚ Relojes Android</button>
-                <button class="tab" onclick="setCategory('accesorios', this)">🎮 Celulares y Gadgets</button>
+                <button class="tab" onclick="setCategory('cables', this)">🔌 Cables</button>
+                <button class="tab" onclick="setCategory('gadgets', this)">🎮 Gadgets</button>
             </div>
         </div>
     </div>
@@ -1435,294 +1433,228 @@
 
         /* ========== GRÁFICOS SVG DE RESPALDO AUTOCONTENIDOS ========== */
         const SVG_ICONS = {
-            cableBlack: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="30" y="36" width="180" height="88" rx="14" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
-                <path d="M64 80C64 58 176 58 176 80C176 102 64 102 64 80Z" stroke="#a7f3d0" stroke-width="10"/>
-                <path d="M64 80C64 58 176 58 176 80C176 102 64 102 64 80Z" stroke="#047857" stroke-width="2.5" stroke-dasharray="5 4"/>
-                <rect x="46" y="68" width="24" height="24" rx="4" fill="#0f172a"/>
-                <rect x="170" y="71" width="22" height="18" rx="3" fill="#0284c7"/>
-                <text x="120" y="142" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">MICRO-USB 0.3M</text>
-            </svg>`,
-            cableWhite: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M56 116C56 54 184 54 184 116" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
-                <path d="M56 116C56 54 184 54 184 116" stroke="#047857" stroke-width="2.2" stroke-linecap="round"/>
-                <rect x="44" y="104" width="24" height="30" rx="5" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
-                <rect x="172" y="106" width="22" height="26" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="2.2"/>
-                <text x="120" y="34" fill="#064e3b" font-size="11.5" font-family="sans-serif" font-weight="bold" text-anchor="middle">CARGA RÁPIDA • 1M</text>
-            </svg>`,
             charger: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="80" y="42" width="80" height="76" rx="14" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
                 <rect x="80" y="42" width="80" height="17" rx="6" fill="#047857"/>
                 <rect x="98" y="22" width="8" height="20" rx="2" fill="#064e3b"/>
                 <rect x="134" y="22" width="8" height="20" rx="2" fill="#064e3b"/>
                 <path d="M124 72L112 90H122L116 107L132 88H121L124 72Z" fill="#f59e0b"/>
-                <text x="120" y="140" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">FUENTE 2A + CABLE</text>
+                <text x="120" y="140" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">CARGADOR RÁPIDO</text>
             </svg>`,
-            earphones: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            earbuds: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="88" cy="64" r="21" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
                 <circle cx="88" cy="64" r="9" fill="#0284c7"/>
                 <circle cx="152" cy="64" r="21" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
                 <circle cx="152" cy="64" r="9" fill="#0284c7"/>
                 <path d="M88 85V112C88 124 120 124 120 135M152 85V112C152 124 120 124 120 135" stroke="#047857" stroke-width="4" stroke-linecap="round"/>
                 <rect x="112" y="132" width="16" height="14" rx="3" fill="#f59e0b"/>
-                <text x="120" y="28" fill="#0369a1" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">TYPE-C STEREO</text>
+                <text x="120" y="28" fill="#0369a1" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">AUDIO CRESO</text>
             </svg>`,
-            auxCable: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M54 110C54 46 186 46 186 110" stroke="#047857" stroke-width="8" stroke-linecap="round"/>
-                <rect x="46" y="102" width="16" height="22" rx="3" fill="#ffffff" stroke="#064e3b" stroke-width="2.2"/>
-                <rect x="178" y="102" width="16" height="22" rx="3" fill="#ffffff" stroke="#064e3b" stroke-width="2.2"/>
-                <text x="120" y="142" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">AUX 3.5MM • 2 METROS</text>
+            headphones: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60 92C60 52 180 52 180 92" stroke="#047857" stroke-width="6" stroke-linecap="round"/>
+                <rect x="48" y="84" width="22" height="36" rx="8" fill="#ffffff" stroke="#047857" stroke-width="2.4"/>
+                <rect x="170" y="84" width="22" height="36" rx="8" fill="#ffffff" stroke="#047857" stroke-width="2.4"/>
+                <text x="120" y="142" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">VINCHA WIRELESS</text>
+            </svg>`,
+            cable: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M56 116C56 54 184 54 184 116" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+                <path d="M56 116C56 54 184 54 184 116" stroke="#047857" stroke-width="2.2" stroke-linecap="round"/>
+                <rect x="44" y="104" width="24" height="30" rx="5" fill="#ffffff" stroke="#047857" stroke-width="2.2"/>
+                <rect x="172" y="106" width="22" height="26" rx="5" fill="#ffffff" stroke="#0284c7" stroke-width="2.2"/>
+                <text x="120" y="34" fill="#064e3b" font-size="11.5" font-family="sans-serif" font-weight="bold" text-anchor="middle">CABLE DE DATOS</text>
+            </svg>`,
+            gamepad: `<svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="52" y="46" width="136" height="72" rx="16" fill="#ffffff" stroke="#047857" stroke-width="2.4"/>
+                <path d="M84 72V92M74 82H94" stroke="#064e3b" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="152" cy="76" r="5" fill="#0284c7"/>
+                <circle cx="166" cy="88" r="5" fill="#f59e0b"/>
+                <text x="120" y="140" fill="#064e3b" font-size="11" font-family="sans-serif" font-weight="bold" text-anchor="middle">GAME BOX PLUS</text>
             </svg>`
         };
 
-        /* ========== CATÁLOGO CRESO CON ENLACES DIRECTOS DE FOTO PEGADOS ========== */
+        /* ========== CATÁLOGO CRESO EMPAREJADO CON TU JSON ========== */
         const DEFAULT_PRODUCTS = [
             {
-                id: "samsung-45w-c-a-c",
-                nombre: "Cargador Samsung 45W Super Charger",
-                categoria: "cargadores",
-                desc: "Carga rápida 2.0 (45W PD) con cable Tipo C a C.",
-                precioUnitario: 9000,
-                precioMayorista: 7500,
-                minMayorista: 3,
-                badge: "45W PD",
-                goldBadge: true,
-                svgKey: "charger",
-                customImg: "https://i.ibb.co/Kpkw2Sp9/IMG-20261120-WA0055.jpg"
+                "id": "cargador-samsung-45w-pd01",
+                "nombre": "Cargador Samsung 45W Super Charger",
+                "categoria": "cargadores",
+                "desc": "Carga superrápida 2.0 de 45W con cable USB Tipo C a Tipo C.",
+                "precioUnitario": 9000,
+                "precioMayorista": 7500,
+                "minMayorista": 3,
+                "badge": "45W PD",
+                "goldBadge": true,
+                "svgKey": "charger",
+                "customImg": ""
             },
             {
-                id: "samsung-20w-usb-c",
-                nombre: "Cargador Samsung USB-C 20W Power Adapter",
-                categoria: "cargadores",
-                desc: "Adaptador de corriente USB-C 20W en caja blanca.",
-                precioUnitario: 5500,
-                precioMayorista: 4200,
-                minMayorista: 3,
-                badge: "20W USB-C",
-                goldBadge: false,
-                svgKey: "charger",
-                customImg: "https://i.ibb.co/zTRVDrMH/IMG-20261120-WA0072.jpg"
+                "id": "cargador-samsung-20w-usbc",
+                "nombre": "Cargador Samsung USB-C 20W Power Adapter",
+                "categoria": "cargadores",
+                "desc": "Fuente cargadora de pared USB-C de 20W.",
+                "precioUnitario": 5000,
+                "precioMayorista": 3500,
+                "minMayorista": 3,
+                "badge": "20W USB-C",
+                "goldBadge": false,
+                "svgKey": "charger",
+                "customImg": "https://i.ibb.co/zTRVDrMH/IMG-20261120-WA0072.jpg"
             },
             {
-                id: "bb-micro",
-                nombre: "Cable BlackBerry Micro-USB 0.3m",
-                categoria: "cables",
-                desc: "Cable corto reforzado de 30 cm (ASY-28109-001).",
-                precioUnitario: 900,
-                precioMayorista: 650,
-                minMayorista: 3,
-                badge: "30CM",
-                goldBadge: false,
-                svgKey: "cableBlack",
-                customImg: ""
+                "id": "cargador-kosmo-2a-tipoc",
+                "nombre": "Cargador KOSMO 2A Carga Rápida Tipo C",
+                "categoria": "cargadores",
+                "desc": "Cargador de pared 2A con protección inteligente, carga rápida y cable Tipo C.",
+                "precioUnitario": 4500,
+                "precioMayorista": 3000,
+                "minMayorista": 3,
+                "badge": "2A TIPO C",
+                "goldBadge": false,
+                "svgKey": "charger",
+                "customImg": "https://i.ibb.co/C5kzvj29/IMG-20261120-WA0067.jpg"
             },
             {
-                id: "stark-micro",
-                nombre: "Cable STARK Micro-USB 3.1A (1m)",
-                categoria: "cables",
-                desc: "Carga rápida 3.1A y datos. Cable blanco TPE 1m.",
-                precioUnitario: 1400,
-                precioMayorista: 1000,
-                minMayorista: 3,
-                badge: "3.1A",
-                goldBadge: false,
-                svgKey: "cableWhite",
-                customImg: ""
+                "id": "auriculares-estilo-pro-blancos",
+                "nombre": "Auriculares Inalámbricos Estilo Pro",
+                "categoria": "audio",
+                "desc": "Auriculares inalámbricos in-ear blancos con estuche de carga.",
+                "precioUnitario": 8000,
+                "precioMayorista": 6000,
+                "minMayorista": 3,
+                "badge": "WIRELESS",
+                "goldBadge": false,
+                "svgKey": "earbuds",
+                "customImg": "https://i.ibb.co/5w0fpMv/IMG-20261120-WA0078.jpg"
             },
             {
-                id: "x95-lightning",
-                nombre: "Cable CHARGE X95 USB a Lightning",
-                categoria: "cables",
-                desc: "Carga 2A para iPhone/iPad, diseño reforzado.",
-                precioUnitario: 1200,
-                precioMayorista: 800,
-                minMayorista: 3,
-                badge: "3+ OFF",
-                goldBadge: true,
-                svgKey: "cableWhite",
-                customImg: ""
+                "id": "ultrapods-max-53",
+                "nombre": "Auriculares Ultrapods Max Wireless 5.3",
+                "categoria": "audio",
+                "desc": "Auriculares inalámbricos True Wireless 5.3 con estuche visor de carga.",
+                "precioUnitario": 10000,
+                "precioMayorista": 7500,
+                "minMayorista": 3,
+                "badge": "BT 5.3",
+                "goldBadge": false,
+                "svgKey": "earbuds",
+                "customImg": "https://i.ibb.co/BVSs16Z0/IMG-20261120-WA0080.jpg"
             },
             {
-                id: "wk-lightning",
-                nombre: "Cable WK Design Fullspeed Lightning (1m)",
-                categoria: "cables",
-                desc: "Modelo WDC-072i 2.1A, 1000 mm de largo.",
-                precioUnitario: 1400,
-                precioMayorista: 1000,
-                minMayorista: 3,
-                badge: "2.1A",
-                goldBadge: false,
-                svgKey: "cableWhite",
-                customImg: ""
+                "id": "auriculares-m10-v53",
+                "nombre": "Auriculares Inalámbricos M10 V5.3",
+                "categoria": "audio",
+                "desc": "Auriculares inalámbricos Bluetooth 5.3 con estuche de carga con visor LED.",
+                "precioUnitario": 9000,
+                "precioMayorista": 7500,
+                "minMayorista": 3,
+                "badge": "M10 LED",
+                "goldBadge": false,
+                "svgKey": "earbuds",
+                "customImg": "https://i.ibb.co/G4W3RDrJ/IMG-20261120-WA0076.jpg"
             },
             {
-                id: "otawa-30w-c-c",
-                nombre: "Cable Otawa Datos 30W C to C (DTL-083)",
-                categoria: "cables",
-                desc: "Cable de carga flash y datos C a C de 30W.",
-                precioUnitario: 2200,
-                precioMayorista: 1600,
-                minMayorista: 3,
-                badge: "30W C-C",
-                goldBadge: false,
-                svgKey: "cableWhite",
-                customImg: "https://i.ibb.co/sJ3TGD9H/IMG-20261120-WA0063.jpg"
+                "id": "a6s-mipods-53",
+                "nombre": "Auriculares A6S MiPods Wireless 5.3",
+                "categoria": "audio",
+                "desc": "Auriculares inalámbricos True Wireless Headset 5.3 con estuche negro.",
+                "precioUnitario": 7000,
+                "precioMayorista": 5000,
+                "minMayorista": 3,
+                "badge": "A6S",
+                "goldBadge": false,
+                "svgKey": "earbuds",
+                "customImg": "https://i.ibb.co/Xk3M6hpJ/IMG-20261120-WA0069.jpg"
             },
             {
-                id: "otawa-30w-typec",
-                nombre: "Cable Otawa Datos 30W Type-C (DTL-082)",
-                categoria: "cables",
-                desc: "Cable de carga flash y datos 30W Type-C (caja verde).",
-                precioUnitario: 2200,
-                precioMayorista: 1600,
-                minMayorista: 3,
-                badge: "30W TYPE-C",
-                goldBadge: false,
-                svgKey: "cableWhite",
-                customImg: "https://i.ibb.co/ksP0384W/IMG-20261120-WA0061.jpg"
+                "id": "auriculares-p47-vincha",
+                "nombre": "Auriculares Vincha Inalámbricos P47",
+                "categoria": "audio",
+                "desc": "Auriculares inalámbricos tipo vincha P47 con botones de control y reproductor.",
+                "precioUnitario": 7000,
+                "precioMayorista": 5000,
+                "minMayorista": 3,
+                "badge": "P47",
+                "goldBadge": false,
+                "svgKey": "headphones",
+                "customImg": "https://i.ibb.co/TM8jsKMT/IMG-20261120-WA0074.jpg"
             },
             {
-                id: "lambo-4en1",
-                nombre: "Cable Lambo Tech Turbo 4 en 1 (LT-26052)",
-                categoria: "cables",
-                desc: "1 metro, 65W/27W carga rápida multiconector.",
-                precioUnitario: 3200,
-                precioMayorista: 2400,
-                minMayorista: 3,
-                badge: "4 EN 1",
-                goldBadge: true,
-                svgKey: "cableWhite",
-                customImg: "https://i.ibb.co/B54VxJP4/IMG-20261120-WA0065.jpg"
+                "id": "auriculares-handsfree-samsung",
+                "nombre": "Auriculares Handsfree Estilo Samsung",
+                "categoria": "audio",
+                "desc": "Auriculares con cable manos libres (Handsfree).",
+                "precioUnitario": 3000,
+                "precioMayorista": 2000,
+                "minMayorista": 3,
+                "badge": "HANDSFREE",
+                "goldBadge": false,
+                "svgKey": "earbuds",
+                "customImg": "https://i.ibb.co/ZRJB3rDJ/IMG-20261120-WA0059.jpg"
             },
             {
-                id: "lambo-hdtv",
-                nombre: "Cable Lambo Tech Type-C a HDTV (LT-26003)",
-                categoria: "cables",
-                desc: "Adaptador USB Tipo C a HDTV con soporte 4K 30Hz.",
-                precioUnitario: 4800,
-                precioMayorista: 3600,
-                minMayorista: 3,
-                badge: "4K HDTV",
-                goldBadge: false,
-                svgKey: "cableWhite",
-                customImg: "https://i.ibb.co/C5kzvj29/IMG-20261120-WA0067.jpg"
+                "id": "cable-lambo-hdtv-lt26003",
+                "nombre": "Cable Lambo Tech Tipo C a HDTV LT-26003",
+                "categoria": "cables",
+                "desc": "Cable Type C a HDTV 4K 30Hz, modelo LT-26003.",
+                "precioUnitario": 12000,
+                "precioMayorista": 9000,
+                "minMayorista": 3,
+                "badge": "4K HDTV",
+                "goldBadge": false,
+                "svgKey": "cable",
+                "customImg": ""
             },
             {
-                id: "kos-tipoc",
-                nombre: "Cargador KOSMO 2A Carga Rápida (KOS 2A C)",
-                categoria: "cargadores",
-                desc: "Fuente de pared 2A + cable incluido.",
-                precioUnitario: 2800,
-                precioMayorista: 2000,
-                minMayorista: 3,
-                badge: "2A RÁPIDO",
-                goldBadge: false,
-                svgKey: "charger",
-                customImg: "https://i.ibb.co/ZRJB3rDJ/IMG-20261120-WA0059.jpg"
+                "id": "cable-lambo-4en1-lt26052",
+                "nombre": "Cable Lambo Tech 4 en 1 Turbo LT-26052",
+                "categoria": "cables",
+                "desc": "Cable turbo 4 en 1 de 1 metro con conectores intercambiables (65W/27W), modelo LT-26052.",
+                "precioUnitario": 4000,
+                "precioMayorista": 3000,
+                "minMayorista": 3,
+                "badge": "4 EN 1",
+                "goldBadge": false,
+                "svgKey": "cable",
+                "customImg": "https://i.ibb.co/B54VxJP4/IMG-20261120-WA0065.jpg"
             },
             {
-                id: "ultrapods-max",
-                nombre: "Auriculares Ultrapods Max Wireless 5.3",
-                categoria: "audio",
-                desc: "True wireless con estuche display digital.",
-                precioUnitario: 7800,
-                precioMayorista: 6200,
-                minMayorista: 3,
-                badge: "BT 5.3",
-                goldBadge: true,
-                svgKey: "earphones",
-                customImg: "https://i.ibb.co/BVSs16Z0/IMG-20261120-WA0080.jpg"
+                "id": "cable-otawa-30w-dtl083",
+                "nombre": "Cable de Datos OTAWA 30W C a C DTL-083",
+                "categoria": "cables",
+                "desc": "Cable de datos y carga flash 30W, conector C a C, modelo DTL-083.",
+                "precioUnitario": 3000,
+                "precioMayorista": 2500,
+                "minMayorista": 3,
+                "badge": "30W C-C",
+                "goldBadge": false,
+                "svgKey": "cable",
+                "customImg": "https://i.ibb.co/sJ3TGD9H/IMG-20261120-WA0063.jpg"
             },
             {
-                id: "m10-v53",
-                nombre: "Auriculares M10 Wireless V5.3",
-                categoria: "audio",
-                desc: "Inalámbricos con estuche visor LED de batería.",
-                precioUnitario: 7500,
-                precioMayorista: 5900,
-                minMayorista: 3,
-                badge: "LED V5.3",
-                goldBadge: false,
-                svgKey: "earphones",
-                customImg: "https://i.ibb.co/G4W3RDrJ/IMG-20261120-WA0076.jpg"
+                "id": "cable-otawa-30w-dtl082",
+                "nombre": "Cable de Datos OTAWA 30W Tipo C DTL-082",
+                "categoria": "cables",
+                "desc": "Cable de datos y carga flash 30W, conector TYPE-C, modelo DTL-082.",
+                "precioUnitario": 3000,
+                "precioMayorista": 2500,
+                "minMayorista": 3,
+                "badge": "30W TYPE-C",
+                "goldBadge": false,
+                "svgKey": "cable",
+                "customImg": ""
             },
             {
-                id: "a6s-mipods",
-                nombre: "Auriculares A6S MiPods Wireless 5.3",
-                categoria: "audio",
-                desc: "True wireless compactos con estuche de carga.",
-                precioUnitario: 6200,
-                precioMayorista: 4800,
-                minMayorista: 3,
-                badge: "A6S 5.3",
-                goldBadge: false,
-                svgKey: "earphones",
-                customImg: "https://i.ibb.co/Xk3M6hpJ/IMG-20261120-WA0069.jpg"
-            },
-            {
-                id: "p47-wireless",
-                nombre: "Vincha / Auriculares P47 Wireless 5.4+EDR",
-                categoria: "audio",
-                desc: "Auriculares inalámbricos con botones de control.",
-                precioUnitario: 8500,
-                precioMayorista: 6800,
-                minMayorista: 3,
-                badge: "5.4+EDR",
-                goldBadge: false,
-                svgKey: "earphones",
-                customImg: "https://i.ibb.co/TM8jsKMT/IMG-20261120-WA0074.jpg"
-            },
-            {
-                id: "samsung-s20-handsfree",
-                nombre: "Auriculares Samsung High Quality Handsfree",
-                categoria: "audio",
-                desc: "Manos libres con cable en empaque sellado.",
-                precioUnitario: 2600,
-                precioMayorista: 1900,
-                minMayorista: 3,
-                badge: "HANDSFREE",
-                goldBadge: false,
-                svgKey: "earphones",
-                customImg: "https://i.ibb.co/5w0fpMv/IMG-20261120-WA0078.jpg"
-            },
-            {
-                id: "pro21-typec",
-                nombre: "Auriculares pro21 Stereo Type-C",
-                categoria: "audio",
-                desc: "In-ear con micrófono, Extra Bass y ficha Tipo C.",
-                precioUnitario: 3500,
-                precioMayorista: 2500,
-                minMayorista: 3,
-                badge: "TYPE-C",
-                goldBadge: true,
-                svgKey: "earphones",
-                customImg: ""
-            },
-            {
-                id: "aux-2m",
-                nombre: "Cable Auxiliar Audio 2 Metros (4 Pines)",
-                categoria: "audio",
-                desc: "Jack 3.5mm macho-macho (B6309), 2 metros.",
-                precioUnitario: 1400,
-                precioMayorista: 1000,
-                minMayorista: 3,
-                badge: "2 METROS",
-                goldBadge: false,
-                svgKey: "auxCable",
-                customImg: ""
-            },
-            {
-                id: "game-box-plus",
-                nombre: "Consola Retro Game Box Plus",
-                categoria: "accesorios",
-                desc: "Consola portátil con pantalla a color y soporte joystick doble.",
-                precioUnitario: 14500,
-                precioMayorista: 12000,
-                minMayorista: 3,
-                badge: "RETRO",
-                goldBadge: true,
-                svgKey: "charger",
-                customImg: ""
+                "id": "consola-game-box-plus",
+                "nombre": "Consola Portátil Game Box Plus",
+                "categoria": "gadgets",
+                "desc": "Consola portátil Game Box Plus con pantalla y soporte para gamepad externo.",
+                "precioUnitario": 15000,
+                "precioMayorista": 11000,
+                "minMayorista": 3,
+                "badge": "GAME BOX",
+                "goldBadge": false,
+                "svgKey": "gamepad",
+                "customImg": ""
             }
         ];
 
@@ -1732,7 +1664,7 @@
         };
 
         try {
-            const saved = localStorage.getItem("creso_store_brand_v2");
+            const saved = localStorage.getItem("creso_store_brand_v3");
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (parsed.whatsapp) state.whatsapp = parsed.whatsapp;
@@ -1746,7 +1678,7 @@
         let currentCategory = "todos";
 
         function persistState() {
-            try { localStorage.setItem("creso_store_brand_v2", JSON.stringify(state)); } catch (e) {}
+            try { localStorage.setItem("creso_store_brand_v3", JSON.stringify(state)); } catch (e) {}
         }
 
         function showToast(msg, icon = "✅") {
@@ -1773,11 +1705,11 @@
         }
 
         function getProductVisual(p) {
-            const fallbackSvg = (SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite).replace(/"/g, "&quot;");
+            const fallbackSvg = (SVG_ICONS[p.svgKey] || SVG_ICONS.cable).replace(/"/g, "&quot;");
             if (p.customImg) {
                 return `<img src="${p.customImg}" alt="${p.nombre}" loading="eager" onerror="this.onerror=null; this.parentElement.innerHTML='${fallbackSvg}';">`;
             }
-            return SVG_ICONS[p.svgKey] || SVG_ICONS.cableWhite;
+            return SVG_ICONS[p.svgKey] || SVG_ICONS.cable;
         }
 
         function renderProducts() {
